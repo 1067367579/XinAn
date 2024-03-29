@@ -1,0 +1,3 @@
+org/example/config/WebMvcConfiguration.class
+org/example/XinAnApplication.class
+org/example/interceptor/JwtTokenUserInterceptor.class

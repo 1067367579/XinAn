@@ -1,0 +1,13 @@
+/Users/lujingxiang/IdeaProjects/XinAn-demo/XinAn-common/src/main/java/org/example/constant/JwtClaimsConstant.java
+/Users/lujingxiang/IdeaProjects/XinAn-demo/XinAn-common/src/main/java/org/example/utils/AliOssUtil.java
+/Users/lujingxiang/IdeaProjects/XinAn-demo/XinAn-common/src/main/java/org/example/context/BaseContext.java
+/Users/lujingxiang/IdeaProjects/XinAn-demo/XinAn-common/src/main/java/org/example/utils/JwtUtil.java
+/Users/lujingxiang/IdeaProjects/XinAn-demo/XinAn-common/src/main/java/org/example/result/PageResult.java
+/Users/lujingxiang/IdeaProjects/XinAn-demo/XinAn-common/src/main/java/org/example/json/JacksonObjectMapper.java
+/Users/lujingxiang/IdeaProjects/XinAn-demo/XinAn-common/src/main/java/org/example/constant/StatusConstant.java
+/Users/lujingxiang/IdeaProjects/XinAn-demo/XinAn-common/src/main/java/org/example/properties/AliOssProperties.java
+/Users/lujingxiang/IdeaProjects/XinAn-demo/XinAn-common/src/main/java/org/example/properties/WeChatProperties.java
+/Users/lujingxiang/IdeaProjects/XinAn-demo/XinAn-common/src/main/java/org/example/result/Result.java
+/Users/lujingxiang/IdeaProjects/XinAn-demo/XinAn-common/src/main/java/org/example/constant/MessageConstant.java
+/Users/lujingxiang/IdeaProjects/XinAn-demo/XinAn-common/src/main/java/org/example/utils/HttpClientUtil.java
+/Users/lujingxiang/IdeaProjects/XinAn-demo/XinAn-common/src/main/java/org/example/properties/JwtProperties.java

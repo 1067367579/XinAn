@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xinan.mapper.FriendMapper">
+
+    <update id="update">
+        update XinAn.friend
+        <set>
+            <if test="remarkName!=null and remarkName!=''">
+                remark_name = #{remarkName},
+            </if>
+            <if test="friendCategoryId!=null">
+                friend_category_id = #{friendCategoryId},
+            </if>
+            <if test="invited!=null">
+                invited = #{invited},
+            </if>
+        </set>
+        where user_id = #{userId} and friend_id = #{friendId}
+    </update>
+</mapper>
