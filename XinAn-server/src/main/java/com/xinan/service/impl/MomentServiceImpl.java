@@ -1,5 +1,6 @@
 package com.xinan.service.impl;
 
+import com.xinan.context.BaseContext;
 import com.xinan.dto.MomentDTO;
 import com.xinan.dto.MomentLikesDTO;
 import com.xinan.entity.Moment;
@@ -38,6 +39,10 @@ public class MomentServiceImpl implements MomentService {
         Moment moment = new Moment();
         BeanUtils.copyProperties(momentDTO,moment);
         moment.setCreateTime(LocalDateTime.now());
+        if(momentDTO.getId() == null)
+        {
+            moment.setUserId(BaseContext.getCurrentId());
+        }
         momentMapper.insertMoment(moment);
     }
 

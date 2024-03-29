@@ -341,6 +341,13 @@ public class UserServiceImpl implements UserService {
         Long friendId = friendDTO.getId();
         Long friendCategoryId = friendDTO.getFriendCategoryId();
         String remarkName = friendDTO.getRemarkName();
+        User friend = userMapper.getById(friendId);
+        User user = userMapper.getById(userId);
+        if(remarkName.isEmpty())
+        {
+            //如果备注名为空 那么默认初始化为用户名
+            remarkName = friend.getUsername();
+        }
         LocalDateTime createTime = LocalDateTime.now();
         friendMapper.insert(Friend.builder()
                 .userId(userId)
@@ -351,6 +358,7 @@ public class UserServiceImpl implements UserService {
                 //表示未邀请该好友
                 .invited(StatusConstant.NOT_FINISHED)
                 .build());
+        remarkName = user.getUsername();
         friendMapper.insert(Friend.builder()
                 .userId(friendId)
                 .friendId(userId)
