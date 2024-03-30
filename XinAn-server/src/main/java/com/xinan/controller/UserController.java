@@ -181,4 +181,10 @@ public class UserController {
         userService.addFavorite(userMerchantDTO);
         return Result.success();
     }
+
+    //TODO 更改分组
+
+    //TODO 删除分组
+
+    //TODO 删除好友
 }

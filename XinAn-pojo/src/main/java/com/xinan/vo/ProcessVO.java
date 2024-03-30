@@ -1,6 +1,6 @@
 package com.xinan.vo;
 
-import io.swagger.annotations.Api;
+import com.xinan.entity.ProcessDetail;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -29,5 +29,5 @@ public class ProcessVO {
     @ApiModelProperty(value = "流程排序")
     private Integer order;
     @ApiModelProperty(value = "流程细则集合")
-    private List<String> detail;
+    private List<ProcessDetail> detail;
 }
