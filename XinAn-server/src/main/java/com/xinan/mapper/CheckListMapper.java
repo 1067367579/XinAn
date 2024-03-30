@@ -1,5 +1,6 @@
 package com.xinan.mapper;
 
+import com.xinan.dto.CheckListDTO;
 import com.xinan.entity.CheckList;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -20,4 +21,6 @@ public interface CheckListMapper {
     @Select("select id, user_id, invite_state, wish_state, social_platform_state, password_box_state, pet_state, treasure_state" +
             " from XinAn.check_list where user_id = #{userId}")
     CheckList getByUserId(Long userId);
+
+    void update(CheckListDTO checkListDTO);
 }
