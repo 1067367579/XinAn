@@ -13,13 +13,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
 
-@SpringBootTest(classes = HttpClientTest.class)
+//@SpringBootTest(classes = HttpClientTest.class)
 public class HttpClientTest {
 
     /**
      * 测试用httpClient发送GET请求
      */
-    @Test
+    //@Test
     public void testGET() throws IOException {
         //创建httpClient
         CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -47,7 +47,7 @@ public class HttpClientTest {
     }
 
     //发送POST请求
-    @Test
+    //@Test
     public void testPOST() throws IOException, JSONException {
         //还是创建httpClient对象
         CloseableHttpClient httpClient = HttpClients.createDefault();

@@ -28,7 +28,7 @@ public class ProcessController {
 
     //修改服务流程 添加 删除(批量删除)
     @DeleteMapping("/{ids}")
-    @ApiModelProperty(value = "按照流程id批量删除流程")
+    @ApiOperation(value = "按照流程id批量删除流程")
     public Result deleteByIds(@PathVariable List<Long> ids)
     {
         return Result.success();
