@@ -21,6 +21,7 @@ public class ListController {
 
     //获取清单页信息 清单进度 各项状况
     @GetMapping("/{id}")
+    @ApiOperation(value = "根据用户id查询清单页")
     public Result<CheckListVO> getByUserId(@PathVariable Long id)
     {
         log.info("根据用户id查询清单页信息:{}",id);
