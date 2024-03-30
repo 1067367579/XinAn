@@ -1,7 +1,6 @@
 package com.xinan.controller;
 
 import com.xinan.dto.CheckListDTO;
-import com.xinan.entity.CheckList;
 import com.xinan.result.Result;
 import com.xinan.service.CheckListService;
 import com.xinan.vo.CheckListVO;

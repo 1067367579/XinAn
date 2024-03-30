@@ -4,7 +4,6 @@ import com.xinan.entity.Merchant;
 import com.xinan.entity.MerchantAddress;
 import com.xinan.entity.MerchantCategory;
 import com.xinan.entity.UserMerchant;
-import com.xinan.vo.MerchantVO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;

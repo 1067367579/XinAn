@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
-import java.net.http.HttpClient;
 
 @SpringBootTest(classes = HttpClientTest.class)
 public class HttpClientTest {

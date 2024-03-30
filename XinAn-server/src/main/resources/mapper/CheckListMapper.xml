@@ -7,22 +7,22 @@
         update XinAn.check_list
         <set>
             <if test="inviteState!=null">
-                invite_state = #{inviteState}
+                invite_state = #{inviteState},
             </if>
             <if test="wishState!=null">
-                wish_state = #{wishState}
+                wish_state = #{wishState},
             </if>
             <if test="socialPlatformState!=null">
-                social_platform_state = #{socialPlatformState}
+                social_platform_state = #{socialPlatformState},
             </if>
             <if test="passwordBoxState!=null">
-                password_box_state = #{passwordBoxState}
+                password_box_state = #{passwordBoxState},
             </if>
             <if test="petState!=null">
-                pet_state = #{petState}
+                pet_state = #{petState},
             </if>
             <if test="treasureState!=null">
-                treasure_state = #{treasureState}
+                treasure_state = #{treasureState},
             </if>
         </set>
         where id = #{id};

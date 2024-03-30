@@ -5,7 +5,6 @@ import com.xinan.dto.CheckListDTO;
 import com.xinan.entity.CheckList;
 import com.xinan.mapper.CheckListMapper;
 import com.xinan.service.CheckListService;
-import com.xinan.service.UserService;
 import com.xinan.vo.CheckListVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;

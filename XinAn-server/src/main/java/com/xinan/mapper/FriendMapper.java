@@ -1,6 +1,5 @@
 package com.xinan.mapper;
 
-import com.xinan.dto.FriendDTO;
 import com.xinan.entity.Friend;
 import com.xinan.vo.FriendVO;
 import org.apache.ibatis.annotations.Insert;
