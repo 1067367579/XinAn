@@ -2,6 +2,7 @@ package com.xinan.controller;
 
 import com.xinan.constant.JwtClaimsConstant;
 import com.xinan.dto.*;
+import com.xinan.entity.FriendCategory;
 import com.xinan.entity.User;
 import com.xinan.properties.JwtProperties;
 import com.xinan.result.Result;
@@ -11,6 +12,7 @@ import com.xinan.vo.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -182,9 +184,34 @@ public class UserController {
         return Result.success();
     }
 
-    //TODO 更改分组
+    //更改好友分组信息
+    @PutMapping("/friendCategory")
+    @ApiOperation(value = "根据好友分组对象id修改分组信息")
+    public Result updateFriendCategory(@RequestBody FriendCategory friendCategory)
+    {
+        log.info("根据好友分组对象id修改分组信息:{}",friendCategory.getId());
+        userService.updateFriendCategory(friendCategory);
+        return Result.success();
+    }
 
-    //TODO 删除分组
+    //删除分组时 要将所有该组的好友移到未分组(我的好友)的组中
+    // 我的好友分组不可删除
+    @DeleteMapping("/friendCategory/{id}")
+    @ApiOperation(value = "根据好友分组信息id删除分组")
+    public Result deleteFriendCategoryById(@PathVariable Long id)
+    {
+        log.info("根据好友分组信息id删除分组:{}",id);
+        userService.deleteFriendCategoryById(id);
+        return Result.success();
+    }
 
-    //TODO 删除好友
+    //删除好友 直接就把好友记录表的记录删除即可
+    @DeleteMapping("/friend/{friendId}")
+    @ApiOperation(value = "根据好友ID删除好友")
+    public Result deleteFriendById(@PathVariable Long friendId)
+    {
+        log.info("根据好友ID删除好友:{}",friendId);
+        userService.deleteFriendById(friendId);
+        return Result.success();
+    }
 }

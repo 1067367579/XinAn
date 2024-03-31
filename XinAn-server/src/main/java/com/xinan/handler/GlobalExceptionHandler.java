@@ -2,6 +2,7 @@ package com.xinan.handler;
 
 import com.xinan.constant.MessageConstant;
 import com.xinan.exception.AccountNotFoundException;
+import com.xinan.exception.BaseException;
 import com.xinan.result.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -24,6 +25,19 @@ public class GlobalExceptionHandler {
         log.error("异常信息: {}",ex.getMessage());
         return Result.error(ex.getMessage());
     }
+
+    /**
+     * 处理常规业务异常的处理器
+     * @param ex 常规异常
+     * @return result格式数据返回到前端
+     */
+    @ExceptionHandler
+    public Result exceptionHandler(BaseException ex)
+    {
+        log.error("异常信息: {}",ex.getMessage());
+        return Result.error(ex.getMessage());
+    }
+
 
     /**
      * 处理sql异常的处理器

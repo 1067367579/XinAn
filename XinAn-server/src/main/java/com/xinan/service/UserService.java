@@ -1,6 +1,7 @@
 package com.xinan.service;
 
 import com.xinan.dto.*;
+import com.xinan.entity.FriendCategory;
 import com.xinan.entity.User;
 import com.xinan.vo.FriendCategoryVO;
 import com.xinan.vo.FriendVO;
@@ -36,4 +37,9 @@ public interface UserService {
 
     void addFavorite(UserMerchantDTO userMerchantDTO);
 
+    void updateFriendCategory(FriendCategory friendCategory);
+
+    void deleteFriendCategoryById(Long id);
+
+    void deleteFriendById(Long friendId);
 }

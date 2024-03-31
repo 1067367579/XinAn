@@ -51,8 +51,7 @@
     {
       "name": "xinan.jwt.user-ttl",
       "type": "java.lang.Long",
-      "sourceType": "com.xinan.properties.JwtProperties",
-      "defaultValue": 0
+      "sourceType": "com.xinan.properties.JwtProperties"
     },
     {
       "name": "xinan.wechat.api-v3-key",

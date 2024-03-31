@@ -2,6 +2,7 @@ package com.xinan.mapper;
 
 import com.xinan.entity.Friend;
 import com.xinan.vo.FriendVO;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -23,4 +24,7 @@ public interface FriendMapper {
     void insert(Friend friend);
 
     void update(Friend friend);
+
+    @Delete("delete from friend where friend_id = #{friendId} and user_id = #{userId}")
+    void deleteFriend(Friend friend);
 }

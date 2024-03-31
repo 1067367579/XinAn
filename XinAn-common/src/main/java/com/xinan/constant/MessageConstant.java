@@ -12,4 +12,5 @@ public class MessageConstant {
     public static final String UPLOAD_FAILED = "文件上传失败";
     public static final String DUPLICATE_CATEGORY = "分类重复";
     public static final String ACCOUNT_NOT_FOUND_ERROR = "账号不存在";
+    public static final String DELETE_NOT_ALLOWED = "该项不允许删除";
 }

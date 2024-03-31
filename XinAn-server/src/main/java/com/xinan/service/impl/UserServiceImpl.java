@@ -480,6 +480,32 @@ public class UserServiceImpl implements UserService {
         merchantMapper.addFavorite(userMerchant);
     }
 
+    @Override
+    public void updateFriendCategory(FriendCategory friendCategory) {
+        friendCategoryMapper.update(friendCategory);
+    }
+
+    @Override
+    public void deleteFriendCategoryById(Long id) {
+        FriendCategory category = friendCategoryMapper.getById(id);
+        if(category.getName().equals("我的好友"))
+        {
+            throw new BaseException(MessageConstant.DELETE_NOT_ALLOWED);
+        }
+        friendCategoryMapper.deleteById(id);
+    }
+
+    @Override
+    public void deleteFriendById(Long friendId) {
+        Long userId = BaseContext.getCurrentId();
+        Friend friend = Friend.builder()
+                        .userId(userId)
+                        .friendId(friendId)
+                        .build();
+        //根据自己的id和好友的id定位记录进行删除
+        friendMapper.deleteFriend(friend);
+    }
+
 
     /**
      * 获取清单状态中已经完成的项目的个数
