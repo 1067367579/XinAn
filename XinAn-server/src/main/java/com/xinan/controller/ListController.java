@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user/list")
-@Api(tags = "清单页相关接口")
+@Api(tags = "清单页模块相关接口")
 @Slf4j
 public class ListController {
 

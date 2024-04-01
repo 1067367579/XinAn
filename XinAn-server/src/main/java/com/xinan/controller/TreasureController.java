@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @Slf4j
-@Api(tags = "珍宝收藏相关接口")
+@Api(tags = "珍宝收藏模块相关接口")
 @RequestMapping("/user/treasure")
 public class TreasureController {
 
@@ -21,7 +21,6 @@ public class TreasureController {
     public Result insert(@RequestBody Treasure treasure)
     {
         log.info("添加珍宝");
-
         return Result.success();
     }
 
@@ -31,7 +30,6 @@ public class TreasureController {
     public Result deleteById(@PathVariable Long id)
     {
         log.info("根据珍宝id删除珍宝收藏:{}",id);
-
         return Result.success();
     }
 
@@ -44,12 +42,21 @@ public class TreasureController {
         return Result.success();
     }
 
-    //全范围查询珍宝
-    @GetMapping("/{userId}")
-    @ApiOperation(value = "根据用户id查看所有珍宝")
-    public Result<List<Treasure>> listAll(@PathVariable Long userId)
+    //TODO 查询用户所有珍宝收藏
+    @GetMapping
+    @ApiOperation(value = "查看用户所有珍宝")
+    public Result<List<Treasure>> listAll()
     {
-        log.info("根据用户id查看所有珍宝:{}",userId);
+        log.info("查看用户所有珍宝");
+        return Result.success();
+    }
+
+    //TODO 根据珍宝id查询珍宝收藏 -- 用于回显进行修改
+    @GetMapping("/{id}")
+    @ApiOperation(value = "根据珍宝id查询珍宝收藏")
+    public Result<Treasure> getById(@PathVariable Long id)
+    {
+        log.info("根据珍宝ID查询珍宝收藏:{}",id);
         return Result.success();
     }
 }

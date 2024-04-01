@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/user/invitation")
-@Api(tags = "葬礼邀请相关接口")
+@Api(tags = "葬礼邀请模块相关接口")
 @Slf4j
 public class InvitationController {
 
