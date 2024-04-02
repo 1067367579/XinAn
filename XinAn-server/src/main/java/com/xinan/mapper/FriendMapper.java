@@ -19,8 +19,8 @@ public interface FriendMapper {
             "from XinAn.friend,XinAn.user where friend.user_id = #{userId} and friend_id = user.id")
     List<FriendVO> listFriends(Long userId);
 
-    @Insert("insert into XinAn.friend (user_id, friend_id, friend_category_id, remark_name, create_time) " +
-            "values (#{userId},#{friendId},#{friendCategoryId},#{remarkName},#{createTime})")
+    @Insert("insert into XinAn.friend (user_id, friend_id, friend_category_id, remark_name,invited, create_time) " +
+            "values (#{userId},#{friendId},#{friendCategoryId},#{remarkName},#{invited},#{createTime})")
     void insert(Friend friend);
 
     @Select("select * from friend where user_id = #{userId} and friend_id = #{friendId}")

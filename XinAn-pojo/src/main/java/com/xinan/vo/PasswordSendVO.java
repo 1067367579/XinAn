@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @ApiModel(value = "密码发送信息数据模型")
 public class PasswordSendVO {
-    @ApiModelProperty(value = "发送表条目id")
-    private Long id;
+    @ApiModelProperty(value = "密码id")
+    private Long packageId;
     @ApiModelProperty(value = "发送者备注名")
     private String remarkName;
     @ApiModelProperty(value = "发送者头像图片路径")

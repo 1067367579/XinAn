@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @ApiModel(value = "宠物发送信息数据模型")
 public class PetSendVO {
-    @ApiModelProperty(value = "发送表条目id")
-    private Long id;
+    @ApiModelProperty(value = "宠物id")
+    private Long petId;
     @ApiModelProperty(value = "发送者备注名")
     private String remarkName;
     @ApiModelProperty(value = "发送者头像图片路径")

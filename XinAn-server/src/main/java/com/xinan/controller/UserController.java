@@ -12,7 +12,6 @@ import com.xinan.utils.JwtUtil;
 import com.xinan.vo.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -137,8 +136,10 @@ public class UserController {
     @ApiOperation(value = "查看好友请求")
     public Result<List<FriendRequestVO>> listMessage()
     {
-        log.info("查看当前用户好友请求");
-        return Result.success();
+        Long userId = BaseContext.getCurrentId();
+        log.info("查看当前用户好友请求:{}",userId);
+        List<FriendRequestVO> vo = userService.listMessage(userId);
+        return Result.success(vo);
     }
 
     @PostMapping("/friends")

@@ -3,10 +3,7 @@ package com.xinan.service;
 import com.xinan.dto.*;
 import com.xinan.entity.FriendCategory;
 import com.xinan.entity.User;
-import com.xinan.vo.FriendCategoryVO;
-import com.xinan.vo.FriendVO;
-import com.xinan.vo.MerchantVO;
-import com.xinan.vo.UserVO;
+import com.xinan.vo.*;
 
 import java.util.List;
 
@@ -44,4 +41,6 @@ public interface UserService {
     void deleteFriendById(Long friendId);
 
     void sendRequest(MessageDTO messageDTO);
+
+    List<FriendRequestVO> listMessage(Long userId);
 }

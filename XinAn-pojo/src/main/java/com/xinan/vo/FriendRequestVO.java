@@ -13,14 +13,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @ApiModel(value = "返回给前端的好友请求数据模型")
 public class FriendRequestVO {
-    @ApiModelProperty(value = "发送表条目id")
-    private Long id;
     @ApiModelProperty(value = "用户id")
     private Long userId;
     @ApiModelProperty(value = "用户名")
     private String username;
     @ApiModelProperty(value = "用户头像图片路径")
-    private String image;
+    private String avatar;
     @ApiModelProperty(value = "用户手机号")
     private String phone;
 }

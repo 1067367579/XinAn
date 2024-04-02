@@ -17,10 +17,7 @@ import com.xinan.mapper.*;
 import com.xinan.properties.WeChatProperties;
 import com.xinan.service.UserService;
 import com.xinan.utils.HttpClientUtil;
-import com.xinan.vo.FriendCategoryVO;
-import com.xinan.vo.FriendVO;
-import com.xinan.vo.MerchantVO;
-import com.xinan.vo.UserVO;
+import com.xinan.vo.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -499,6 +496,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void deleteFriendById(Long friendId) {
         Long userId = BaseContext.getCurrentId();
         Friend friend = Friend.builder()
@@ -507,6 +505,11 @@ public class UserServiceImpl implements UserService {
                         .build();
         //根据自己的id和好友的id定位记录进行删除
         friendMapper.deleteFriend(friend);
+        Friend friend1 = Friend.builder()
+                .userId(friendId)
+                .friendId(userId)
+                .build();
+        friendMapper.deleteFriend(friend1);
     }
 
     /**
@@ -535,7 +538,27 @@ public class UserServiceImpl implements UserService {
         messageMapper.insert(message);
     }
 
-
+    @Override
+    public List<FriendRequestVO> listMessage(Long userId) {
+        Message message = Message.builder()
+                .receiverId(userId)
+                .packageCategory(UserConstant.FRIEND_REQUEST)
+                .build();
+        //1. 根据用户id和信息种类去信息表中查到信息类
+        List<Message> messages = messageMapper.getMessage(message);
+        if(messages.isEmpty())
+        {
+            return null;
+        }
+        List<Long> ids = new ArrayList<>();
+        for (Message m : messages) {
+            ids.add(m.getSenderId());
+        }
+        //要删除这些信息
+        messageMapper.deleteMessage(message);
+        //2. 再根据用户id集合到用户表中查询到信息返回
+        return userMapper.getRequest(ids);
+    }
 
 
     /**

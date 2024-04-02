@@ -45,7 +45,7 @@ public class PasswordController {
         return Result.success();
     }
 
-    //TODO 查看密码发送收件箱
+    //TODO 查看密码发送收件箱 点击接受时前端传过来包的id(在此处也就是密码id)
     @GetMapping("/receive")
     @ApiOperation(value = "查看密码发送收件箱")
     public Result<List<PasswordSendVO>> listMessage()

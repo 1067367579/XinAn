@@ -1,10 +1,13 @@
 package com.xinan.mapper;
 
 import com.xinan.entity.User;
+import com.xinan.vo.FriendRequestVO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 @Mapper
 public interface UserMapper {
@@ -28,4 +31,7 @@ public interface UserMapper {
     @Select("select id, openid, username, phone, gender, birthday, avatar, signature, background_image, create_time" +
             " from XinAn.user where phone = #{phone}")
     User getByPhone(String phone);
+
+
+    List<FriendRequestVO> getRequest(List<Long> ids);
 }
