@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ApiModel(value = "返回给前端的商家信息对象")
+@ApiModel(value = "返回给前端的商家信息数据模型")
 public class MerchantVO {
     @ApiModelProperty(value = "商家id")
     private Long id;

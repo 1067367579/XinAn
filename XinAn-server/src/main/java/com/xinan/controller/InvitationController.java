@@ -1,5 +1,6 @@
 package com.xinan.controller;
 
+import com.xinan.context.BaseContext;
 import com.xinan.dto.InvitationDTO;
 import com.xinan.result.Result;
 import com.xinan.service.InvitationService;
@@ -32,10 +33,11 @@ public class InvitationController {
     }
 
     //根据用户id分类查询全部好友
-    @GetMapping("/{id}")
-    @ApiOperation(value = "根据用户id分类查询全部好友")
-    public Result<List<InvitationVO>> listAll(@PathVariable Long id)
+    @GetMapping
+    @ApiOperation(value = "分类查询当前用户全部好友")
+    public Result<List<InvitationVO>> listAll()
     {
+        Long id = BaseContext.getCurrentId();
         log.info("根据用户id分类查询全部好友:{}",id);
         List<InvitationVO> list = invitationService.listAllByCategoryId(id);
         return Result.success(list);

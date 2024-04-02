@@ -8,4 +8,7 @@ public class UserConstant {
     public static final String DEFAULT_BACKGROUND_IMAGE = "https://xinanv1.oss-cn-shenzhen.aliyuncs.com/default_background_image.png";
     public static final String DEFAULT_SIGNATURE = "这是我的个性签名";
     public static final Integer CHECKLIST_COUNT = 6;
+    public static final Integer FRIEND_REQUEST = 0;
+    public static final Integer PASSWORD_SEND = 1;
+    public static final Integer PET_SEND = 2;
 }

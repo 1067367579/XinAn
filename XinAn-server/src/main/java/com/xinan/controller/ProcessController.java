@@ -1,5 +1,6 @@
 package com.xinan.controller;
 
+import com.xinan.context.BaseContext;
 import com.xinan.dto.MerchantAddressDTO;
 import com.xinan.dto.ProcessDTO;
 import com.xinan.dto.ProcessOrderDTO;
@@ -15,17 +16,17 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/user/process")
-@Api(tags = "服务模块相关接口")
+@Api(tags = "服务流程模块相关接口")
 @Slf4j
 public class ProcessController {
 
     //TODO 查看服务进度 按照用户查询
-    @GetMapping("/{userId}")
-    @ApiOperation(value = "按照用户id查询服务流程")
-    public Result<ProcessVO> getByUserId(@PathVariable Long userId)
+    @GetMapping
+    @ApiOperation(value = "查询当前用户服务流程")
+    public Result<ProcessVO> getByUserId()
     {
+        Long userId = BaseContext.getCurrentId();
         log.info("按照用户id查询服务流程:{}",userId);
-
         return Result.success();
     }
 

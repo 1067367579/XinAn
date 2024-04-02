@@ -42,4 +42,6 @@ public interface UserService {
     void deleteFriendCategoryById(Long id);
 
     void deleteFriendById(Long friendId);
+
+    void sendRequest(MessageDTO messageDTO);
 }

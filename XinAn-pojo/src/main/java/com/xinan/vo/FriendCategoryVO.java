@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ApiModel(value = "返回给前端的好友分类对象")
+@ApiModel(value = "返回给前端的好友分类数据模型")
 public class FriendCategoryVO {
     @ApiModelProperty(value = "好友分类id")
     Long id;

@@ -13,7 +13,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ApiModel("好友分类传输数据模型")
+@ApiModel("好友分类数据传输模型")
 public class FriendCategoryDTO implements Serializable {
     @ApiModelProperty(value = "分类名称")
     private String name;

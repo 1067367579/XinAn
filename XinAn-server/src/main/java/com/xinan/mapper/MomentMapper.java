@@ -22,8 +22,9 @@ public interface MomentMapper {
             " values (#{userId},#{momentId},#{createTime})")
     void insertLikes(MomentLikes momentLikes);
 
-    @Delete("delete from XinAn.moment_likes where id = #{id}")
-    void deleteLikesById(Long id);
+    @Delete("delete from XinAn.moment_likes where user_id = #{userId} and " +
+            "moment_id = #{momentId} ")
+    void deleteLikes(MomentLikes momentLikes);
 
     @Select("select id, user_id, title, sub_title, photo1, photo2, photo3, photo4, begin_date, end_date, create_time" +
             " from moment order by create_time desc")

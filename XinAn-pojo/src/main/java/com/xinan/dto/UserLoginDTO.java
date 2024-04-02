@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
-@ApiModel(value = "用户登录传输数据模型")
+@ApiModel(value = "用户登录数据传输模型")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

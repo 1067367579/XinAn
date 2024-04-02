@@ -1,5 +1,6 @@
 package com.xinan.controller;
 
+import com.xinan.context.BaseContext;
 import com.xinan.dto.CheckListDTO;
 import com.xinan.result.Result;
 import com.xinan.service.CheckListService;
@@ -20,12 +21,13 @@ public class ListController {
     private CheckListService checkListService;
 
     //获取清单页信息 清单进度 各项状况
-    @GetMapping("/{id}")
-    @ApiOperation(value = "根据用户id查询清单页")
-    public Result<CheckListVO> getByUserId(@PathVariable Long id)
+    @GetMapping
+    @ApiOperation(value = "查询用户清单页状况")
+    public Result<CheckListVO> getByUserId()
     {
-        log.info("根据用户id查询清单页信息:{}",id);
-        CheckListVO vo = checkListService.getByUserId(id);
+        Long userId = BaseContext.getCurrentId();
+        log.info("根据用户id查询清单页信息:{}", userId);
+        CheckListVO vo = checkListService.getByUserId(userId);
         return Result.success(vo);
     }
 

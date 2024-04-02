@@ -63,8 +63,13 @@ public class MomentServiceImpl implements MomentService {
     }
 
     @Override
-    public void removeMomentLikes(Long id) {
-        momentMapper.deleteLikesById(id);
+    public void removeMomentLikes(Long momentId) {
+        Long userId = BaseContext.getCurrentId();
+        MomentLikes momentLikes = MomentLikes.builder()
+                .momentId(momentId)
+                .userId(userId)
+                .build();
+        momentMapper.deleteLikes(momentLikes);
     }
 
     @Override

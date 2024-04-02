@@ -13,7 +13,7 @@ public interface MomentService {
 
     void insertMomentLikes(MomentLikesDTO momentLikesDTO);
 
-    void removeMomentLikes(Long id);
+    void removeMomentLikes(Long momentId);
 
     List<MomentVO> listAll();
 

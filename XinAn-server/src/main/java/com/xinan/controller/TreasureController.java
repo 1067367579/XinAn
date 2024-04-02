@@ -20,7 +20,7 @@ public class TreasureController {
     @ApiOperation(value = "添加珍宝")
     public Result insert(@RequestBody Treasure treasure)
     {
-        log.info("添加珍宝");
+        log.info("添加珍宝:{}",treasure);
         return Result.success();
     }
 

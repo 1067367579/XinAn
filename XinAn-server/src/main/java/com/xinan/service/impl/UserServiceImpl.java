@@ -65,6 +65,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private FriendCategoryMapper friendCategoryMapper;
 
+    @Autowired
+    private MessageMapper messageMapper;
+
     /**
      * 注入微信配置项
      */
@@ -505,6 +508,34 @@ public class UserServiceImpl implements UserService {
         //根据自己的id和好友的id定位记录进行删除
         friendMapper.deleteFriend(friend);
     }
+
+    /**
+     * 发送好友请求 添加进信息表
+     * @param messageDTO 信息数据传输模型
+     */
+    @Override
+    public void sendRequest(MessageDTO messageDTO) {
+        Long senderId = BaseContext.getCurrentId();
+        Integer packageCategory = UserConstant.FRIEND_REQUEST;
+        Long receiverId = messageDTO.getReceiverId();
+        Friend friend = Friend.builder()
+                .userId(senderId)
+                .friendId(receiverId)
+                .build();
+        Friend res = friendMapper.getByUserIdAndFriendId(friend);
+        if(res!=null)
+        {
+            throw new BaseException(MessageConstant.ALREADY_FRIEND);
+        }
+        Message message = Message.builder()
+                .senderId(senderId)
+                .receiverId(receiverId)
+                .packageCategory(packageCategory)
+                .build();
+        messageMapper.insert(message);
+    }
+
+
 
 
     /**

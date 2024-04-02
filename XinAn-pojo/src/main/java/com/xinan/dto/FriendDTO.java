@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
-@ApiModel("好友传输数据模型")
+@ApiModel(value = "好友数据传输模型")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data

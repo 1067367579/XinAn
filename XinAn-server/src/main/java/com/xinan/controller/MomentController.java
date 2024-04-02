@@ -49,12 +49,12 @@ public class MomentController {
         return Result.success();
     }
 
-    @DeleteMapping("/likes/{id}")
-    @ApiOperation(value = "用户根据点赞id撤销点赞")
-    public Result removeMomentLikes(@PathVariable Long id)
+    @DeleteMapping("/likes/{momentId}")
+    @ApiOperation(value = "用户根据安心圈id撤销点赞")
+    public Result removeMomentLikes(@PathVariable Long momentId)
     {
-        log.info("用户根据点赞id撤销点赞:{}",id);
-        momentService.removeMomentLikes(id);
+        log.info("用户根据安心圈id撤销点赞:{}",momentId);
+        momentService.removeMomentLikes(momentId);
         return Result.success();
     }
 
@@ -80,6 +80,7 @@ public class MomentController {
     @ApiOperation(value = "根据id删除安心圈动态")
     public Result deleteById(@PathVariable Long id)
     {
+        //默认前端 已经完成删除校验
         log.info("根据id删除安心圈动态:{}",id);
         momentService.deleteById(id);
         return Result.success();

@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ApiModel(value = "用户收藏商家传输数据模型")
+@ApiModel(value = "用户收藏商家数据传输模型")
 public class UserMerchantDTO {
     @ApiModelProperty(value = "待收藏的商家id")
     private Long merchantId;

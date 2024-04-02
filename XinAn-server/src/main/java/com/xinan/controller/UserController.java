@@ -1,6 +1,7 @@
 package com.xinan.controller;
 
 import com.xinan.constant.JwtClaimsConstant;
+import com.xinan.context.BaseContext;
 import com.xinan.dto.*;
 import com.xinan.entity.FriendCategory;
 import com.xinan.entity.User;
@@ -11,8 +12,8 @@ import com.xinan.utils.JwtUtil;
 import com.xinan.vo.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -56,7 +57,7 @@ public class UserController {
     }
 
     @GetMapping("/card/{id}")
-    @ApiOperation(value = "根据id查询用户名片")
+    @ApiOperation(value = "根据用户id查询用户名片")
     public Result<UserVO> getCardById(@PathVariable Long id)
     {
         log.info("根据id查询用户名片:{}",id);
@@ -66,7 +67,7 @@ public class UserController {
 
 
     @GetMapping("/{id}")
-    @ApiOperation(value = "根据id查询用户详细信息")
+    @ApiOperation(value = "根据用户id查询用户详细信息")
     public Result<UserVO> getById(@PathVariable Long id)
     {
         log.info("根据id查询用户信息");
@@ -77,7 +78,7 @@ public class UserController {
     }
 
     @GetMapping("/birthday/{id}")
-    @ApiOperation(value = "根据id查询距离用户最近生日天数")
+    @ApiOperation(value = "根据用户id查询距离用户最近生日天数")
     public Result<Long> getDayToBirthday(@PathVariable Long id)
     {
         log.info("根据id:{} 查询还有多少天到用户生日",id);
@@ -112,16 +113,35 @@ public class UserController {
         return Result.success();
     }
 
-    @GetMapping("/friends/{id}")
-    @ApiOperation(value = "根据id查找用户所有好友")
-    public Result<List<FriendVO>> getAllFriends(@PathVariable Long id)
+    @GetMapping("/friends")
+    @ApiOperation(value = "查找用户所有好友")
+    public Result<List<FriendVO>> getAllFriends()
     {
+        Long id = BaseContext.getCurrentId();
         log.info("根据id查询用户所有好友:{}",id);
         List<FriendVO> list = userService.listFriends(id);
         return Result.success(list);
     }
 
-    @PostMapping("/friend")
+    @PostMapping("/friends/request")
+    @ApiOperation(value = "发送好友请求")
+    public Result sendRequest(@RequestBody MessageDTO messageDTO)
+    {
+        log.info("发送添加好友:{} 的请求",messageDTO.getReceiverId());
+        userService.sendRequest(messageDTO);
+        return Result.success();
+    }
+
+    //TODO 查看当前用户好友请求
+    @GetMapping("/friends/request")
+    @ApiOperation(value = "查看好友请求")
+    public Result<List<FriendRequestVO>> listMessage()
+    {
+        log.info("查看当前用户好友请求");
+        return Result.success();
+    }
+
+    @PostMapping("/friends")
     @ApiOperation(value = "添加好友")
     public Result addFriend(@RequestBody FriendDTO friendDTO)
     {
@@ -139,7 +159,7 @@ public class UserController {
         return Result.success(vo);
     }
 
-    @PutMapping("/friend")
+    @PutMapping("/friends")
     @ApiOperation(value = "更改好友信息")
     public Result updateFriend(@RequestBody FriendDTO friendDTO)
     {
@@ -157,19 +177,21 @@ public class UserController {
         return Result.success();
     }
 
-    @GetMapping("/friendCategory/{id}")
-    @ApiOperation(value = "根据用户id查看好友分类")
-    public Result<List<FriendCategoryVO>> getByUserId(@PathVariable Long id)
+    @GetMapping("/friendCategory")
+    @ApiOperation(value = "查询当前用户好友分类")
+    public Result<List<FriendCategoryVO>> getByUserId()
     {
+        Long id = BaseContext.getCurrentId();
         log.info("根据用户id查看好友分类:{}",id);
         List<FriendCategoryVO> list = userService.getFriendCategories(id);
         return Result.success(list);
     }
 
-    @GetMapping("/favorites/{id}")
+    @GetMapping("/favorites")
     @ApiOperation(value = "获取当前用户收藏的商家")
-    public Result<List<MerchantVO>> getFavorites(@PathVariable Long id)
+    public Result<List<MerchantVO>> getFavorites()
     {
+        Long id = BaseContext.getCurrentId();
         log.info("获取当前用户收藏的商家,当前用户:{}",id);
         List<MerchantVO> list = userService.getFavorites(id);
         return Result.success(list);

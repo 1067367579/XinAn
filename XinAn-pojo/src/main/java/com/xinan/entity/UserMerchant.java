@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ApiModel(value = "用户收藏商家信息实体对象")
+@ApiModel(value = "用户收藏商家信息实体")
 public class UserMerchant {
     @ApiModelProperty(value = "用户收藏商家信息id")
     private Long id;

@@ -11,14 +11,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ApiModel(value = "愿望实体")
-public class Wish {
-    @ApiModelProperty(value = "愿望id")
+@ApiModel(value = "宠物信息实体")
+public class Pet {
+    @ApiModelProperty(value = "宠物id")
     private Long id;
     @ApiModelProperty(value = "用户id")
     private Long userId;
-    @ApiModelProperty(value = "愿望内容")
-    private String content;
-    @ApiModelProperty(value = "愿望状态")
-    private Integer Status;
+    @ApiModelProperty(value = "宠物名")
+    private String name;
+    @ApiModelProperty(value = "宠物图片路径")
+    private String image;
 }

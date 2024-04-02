@@ -11,10 +11,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ApiModel(value = "用户按地址查询商家条件数据传输模型")
-public class MerchantAddressDTO {
-    @ApiModelProperty(value = "城市名")
-    private String city;
-    @ApiModelProperty(value = "区/县/镇名")
-    private String district;
+@ApiModel(value = "宠物信息数据传输模型")
+public class PetDTO {
+    @ApiModelProperty(value = "宠物名")
+    private String name;
+    @ApiModelProperty(value = "宠物图片路径")
+    private String image;
 }

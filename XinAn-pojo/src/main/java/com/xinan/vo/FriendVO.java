@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Builder
-@ApiModel("好友列表信息")
+@ApiModel(value = "好友列表信息数据模型")
 public class FriendVO {
     @ApiModelProperty("好友的用户id")
     private Long id;

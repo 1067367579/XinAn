@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ApiModel(value = "安心圈动态数据传输对象")
+@ApiModel(value = "安心圈动态数据传输模型")
 public class MomentDTO implements Serializable {
     @ApiModelProperty(value = "安心圈动态id(修改时需要)")
     private Long id;

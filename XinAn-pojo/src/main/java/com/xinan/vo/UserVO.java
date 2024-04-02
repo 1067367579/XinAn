@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ApiModel(value = "返回给前端的用户数据")
+@ApiModel(value = "返回给前端的用户数据模型")
 public class UserVO {
     @ApiModelProperty(value = "用户id")
     private Long id;

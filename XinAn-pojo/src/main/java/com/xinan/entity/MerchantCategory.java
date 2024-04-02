@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Builder
-@ApiModel(value = "商家分类实体对象")
+@ApiModel(value = "商家分类实体")
 public class MerchantCategory {
     @ApiModelProperty(value = "商家分类id")
     private Long id;

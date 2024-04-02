@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ApiModel(value = "流程细则实体")
+@ApiModel(value = "服务流程细则实体")
 public class ProcessDetail {
     @ApiModelProperty(value = "流程细则id")
     private Long id;

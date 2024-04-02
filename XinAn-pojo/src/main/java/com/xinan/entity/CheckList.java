@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ApiModel(value = "清单状态条目实体类")
+@ApiModel(value = "清单状态条目实体")
 public class CheckList {
     @ApiModelProperty(value = "清单状态条目id")
     private Long id;

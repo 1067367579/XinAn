@@ -23,6 +23,9 @@ public interface FriendMapper {
             "values (#{userId},#{friendId},#{friendCategoryId},#{remarkName},#{createTime})")
     void insert(Friend friend);
 
+    @Select("select * from friend where user_id = #{userId} and friend_id = #{friendId}")
+    Friend getByUserIdAndFriendId(Friend friend);
+
     void update(Friend friend);
 
     @Delete("delete from friend where friend_id = #{friendId} and user_id = #{userId}")
