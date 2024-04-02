@@ -30,7 +30,11 @@
         </set>
         where id = #{id};
     </update>
-    <select id="getIdAndUser" resultType="java.util.Map">
-
+    <select id="getRequest" resultType="com.xinan.vo.FriendRequestVO">
+        select id as userId,username,avatar,phone from user where user.id in
+                         <foreach collection="ids" item="id" open="(" separator="," close=")">
+                             #{id}
+                         </foreach>
+        ;
     </select>
 </mapper>

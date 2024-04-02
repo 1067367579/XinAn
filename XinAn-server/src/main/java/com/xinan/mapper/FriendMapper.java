@@ -15,7 +15,7 @@ public interface FriendMapper {
     @Select("select count(*) from XinAn.friend where user_id = #{userId}")
     Integer getCountByUserId(Long userId);
 
-    @Select("select user.id,friend.remark_name,user.avatar,user.phone,friend.friend_category_id " +
+    @Select("select user.id,friend.remark_name,user.avatar,user.phone,friend.friend_category_id,friend.invited " +
             "from XinAn.friend,XinAn.user where friend.user_id = #{userId} and friend_id = user.id")
     List<FriendVO> listFriends(Long userId);
 

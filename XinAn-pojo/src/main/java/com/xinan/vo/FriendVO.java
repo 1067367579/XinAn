@@ -23,4 +23,6 @@ public class FriendVO {
     private String phone;
     @ApiModelProperty("好友的分类id")
     private Long friendCategoryId;
+    @ApiModelProperty("是否已邀请到葬礼 0未邀请 1已邀请")
+    private Integer invited;
 }

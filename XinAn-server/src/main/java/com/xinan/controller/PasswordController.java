@@ -56,10 +56,10 @@ public class PasswordController {
 
     //TODO 接受密码
     @PutMapping("/receive/{id}")
-    @ApiOperation(value = "根据信息id接受密码")
+    @ApiOperation(value = "根据密码id接受密码")
     public Result receivePassword(@PathVariable Long id)
     {
-        log.info("根据信息id接受密码:{}",id);
+        log.info("根据密码id接受密码:{}",id);
         return Result.success();
     }
 

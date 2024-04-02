@@ -48,7 +48,7 @@ public class PetController {
 
     //TODO 接受宠物
     @PutMapping("/receive/{id}")
-    @ApiOperation(value = "根据信息id接受宠物")
+    @ApiOperation(value = "根据宠物id接受宠物")
     public Result receivePet(@PathVariable Long id)
     {
         log.info("根据信息id接受宠物:{}",id);
