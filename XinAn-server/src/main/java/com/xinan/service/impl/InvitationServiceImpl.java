@@ -42,10 +42,10 @@ public class InvitationServiceImpl implements InvitationService {
         friendMapper.update(friend);
     }
 
+    //好友分类封装
     @Override
     public List<InvitationVO> listAllByCategoryId(Long id) {
         List<FriendVO> friends = friendMapper.listFriends(id);
-        //TODO 好友分类封装
         Map<Long,List<FriendInvitationVO>> map = new HashMap<>();
         for (FriendVO friend : friends) {
             if(!map.containsKey(friend.getFriendCategoryId()))

@@ -20,5 +20,5 @@ public class Wish {
     @ApiModelProperty(value = "愿望内容")
     private String content;
     @ApiModelProperty(value = "愿望状态")
-    private Integer Status;
+    private Integer status;
 }

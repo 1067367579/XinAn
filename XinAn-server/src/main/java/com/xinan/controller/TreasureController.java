@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/user/treasure")
 public class TreasureController {
 
-    //添加珍宝
+    //TODO 添加珍宝
     @PostMapping
     @ApiOperation(value = "添加珍宝")
     public Result insert(@RequestBody Treasure treasure)
@@ -24,7 +24,7 @@ public class TreasureController {
         return Result.success();
     }
 
-    //删除珍宝
+    //TODO 删除珍宝
     @DeleteMapping("/{id}")
     @ApiOperation(value = "根据珍宝id删除珍宝收藏")
     public Result deleteById(@PathVariable Long id)
@@ -33,7 +33,7 @@ public class TreasureController {
         return Result.success();
     }
 
-    //修改珍宝
+    //TODO 修改珍宝
     @PutMapping
     @ApiOperation(value = "根据珍宝id修改珍宝收藏")
     public Result update(@RequestBody Treasure treasure)
