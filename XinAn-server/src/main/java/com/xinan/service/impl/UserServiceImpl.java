@@ -277,6 +277,10 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public void updateUser(UserDTO userDTO) {
+        if(userMapper.getByPhone(userDTO.getPhone())!=null)
+        {
+            throw new BaseException(UserConstant.DUPLICATE_PHONE);
+        }
         User user = new User();
         BeanUtils.copyProperties(userDTO,user);
         userMapper.update(user);

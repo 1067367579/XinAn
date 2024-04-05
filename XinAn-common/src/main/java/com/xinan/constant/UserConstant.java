@@ -12,4 +12,5 @@ public class UserConstant {
     public static final Integer PASSWORD_SEND = 1;
     public static final Integer PET_SEND = 2;
     public static final String DEFAULT_TREASURE_IMAGE = "https://xinanv1.oss-cn-shenzhen.aliyuncs.com/default_treasure_image.png";
+    public static final String DUPLICATE_PHONE = "手机号重复";
 }
