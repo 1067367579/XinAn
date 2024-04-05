@@ -15,4 +15,5 @@ public class MessageConstant {
     public static final String DELETE_NOT_ALLOWED = "该项不允许删除";
     public static final String ALREADY_FRIEND = "对方已在好友列表中";
     public static final String WISH_EMPTY = "请输入愿望";
+    public static final String TREASURE_EMPTY = "请输入珍宝名";
 }

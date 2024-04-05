@@ -14,7 +14,6 @@
 /Users/lujingxiang/IdeaProjects/XinAn-demo/XinAn-common/src/main/java/com/xinan/json/JacksonObjectMapper.java
 /Users/lujingxiang/IdeaProjects/XinAn-demo/XinAn-common/src/main/java/com/xinan/properties/WeChatProperties.java
 /Users/lujingxiang/IdeaProjects/XinAn-demo/XinAn-common/src/main/java/com/xinan/context/BaseContext.java
-/Users/lujingxiang/IdeaProjects/XinAn-demo/XinAn-common/src/main/java/com/xinan/exception/AddressBookBusinessException.java
 /Users/lujingxiang/IdeaProjects/XinAn-demo/XinAn-common/src/main/java/com/xinan/constant/StatusConstant.java
 /Users/lujingxiang/IdeaProjects/XinAn-demo/XinAn-common/src/main/java/com/xinan/constant/JwtClaimsConstant.java
 /Users/lujingxiang/IdeaProjects/XinAn-demo/XinAn-common/src/main/java/com/xinan/utils/JwtUtil.java

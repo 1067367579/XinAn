@@ -3,7 +3,6 @@ META-INF/spring-configuration-metadata.json
 com/xinan/json/JacksonObjectMapper.class
 com/xinan/exception/BaseException.class
 com/xinan/exception/AccountNotFoundException.class
-com/xinan/exception/AddressBookBusinessException.class
 com/xinan/context/BaseContext.class
 com/xinan/properties/JwtProperties.class
 com/xinan/properties/WeChatProperties.class
