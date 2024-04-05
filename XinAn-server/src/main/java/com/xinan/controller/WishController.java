@@ -32,7 +32,7 @@ public class WishController {
         return Result.success();
     }
 
-    //TODO 修改愿望接口(状态/内容)
+    //修改愿望接口(状态/内容)
     @PutMapping
     @ApiOperation(value = "修改愿望(状态/内容)")
     public Result updateWish(@RequestBody Wish wish)
@@ -42,7 +42,7 @@ public class WishController {
         return Result.success();
     }
 
-    //TODO 根据愿望id删除愿望
+    //根据愿望id删除愿望
     @DeleteMapping("/{id}")
     @ApiOperation(value = "根据愿望id删除愿望")
     public Result deleteWish(@PathVariable Long id)
@@ -52,7 +52,7 @@ public class WishController {
         return Result.success();
     }
 
-    //TODO 根据愿望id查询愿望内容 -- 用于修改回显
+    //根据愿望id查询愿望内容 -- 用于修改回显
     @GetMapping("/{id}")
     @ApiOperation(value = "根据愿望id查询愿望内容(修改回显)")
     public Result<Wish> getById(@PathVariable Long id)
@@ -62,7 +62,7 @@ public class WishController {
         return Result.success(wish);
     }
 
-    //TODO 查询当前用户所有愿望 -- 愿望清单页
+    //查询当前用户所有愿望 -- 愿望清单页
     @GetMapping
     @ApiOperation(value = "查询当前用户的所有愿望")
     public Result<List<Wish>> listAll()
