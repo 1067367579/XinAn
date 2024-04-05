@@ -1,5 +1,6 @@
 package com.xinan.controller;
 
+import com.xinan.context.BaseContext;
 import com.xinan.dto.WishDTO;
 import com.xinan.entity.Wish;
 import com.xinan.result.Result;
@@ -21,7 +22,7 @@ public class WishController {
     @Autowired
     private WishService wishService;
 
-    //TODO 添加愿望接口 愿望内容为空时返回错误信息
+    //添加愿望接口 愿望内容为空时返回错误信息
     @PostMapping
     @ApiOperation(value = "添加愿望")
     public Result addWish(@RequestBody WishDTO wishDTO)
@@ -46,15 +47,19 @@ public class WishController {
     @ApiOperation(value = "根据愿望id删除愿望")
     public Result deleteWish(@PathVariable Long id)
     {
+        log.info("根据愿望id删除愿望:{}",id);
+        wishService.deleteWish(id);
         return Result.success();
     }
 
     //TODO 根据愿望id查询愿望内容 -- 用于修改回显
     @GetMapping("/{id}")
-    @ApiOperation(value = "根据愿望id查询愿望内容")
-    public Result getById(@PathVariable Long id)
+    @ApiOperation(value = "根据愿望id查询愿望内容(修改回显)")
+    public Result<Wish> getById(@PathVariable Long id)
     {
-        return Result.success();
+        log.info("根据愿望id查询愿望内容:{}",id);
+        Wish wish = wishService.getById(id);
+        return Result.success(wish);
     }
 
     //TODO 查询当前用户所有愿望 -- 愿望清单页
@@ -62,6 +67,9 @@ public class WishController {
     @ApiOperation(value = "查询当前用户的所有愿望")
     public Result<List<Wish>> listAll()
     {
-        return Result.success();
+        Long userId = BaseContext.getCurrentId();
+        log.info("查询当前用户的所有愿望:{}",userId);
+        List<Wish> list = wishService.listByUser(userId);
+        return Result.success(list);
     }
 }

@@ -39,10 +39,6 @@ public class MomentServiceImpl implements MomentService {
         Moment moment = new Moment();
         BeanUtils.copyProperties(momentDTO,moment);
         moment.setCreateTime(LocalDateTime.now());
-        if(momentDTO.getId() == null)
-        {
-            moment.setUserId(BaseContext.getCurrentId());
-        }
         momentMapper.insertMoment(moment);
     }
 
@@ -64,6 +60,7 @@ public class MomentServiceImpl implements MomentService {
 
     @Override
     public void removeMomentLikes(Long momentId) {
+        //获取当前操作的用户id
         Long userId = BaseContext.getCurrentId();
         MomentLikes momentLikes = MomentLikes.builder()
                 .momentId(momentId)

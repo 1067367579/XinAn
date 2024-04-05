@@ -1,5 +1,6 @@
 package com.xinan.controller;
 
+import com.xinan.context.BaseContext;
 import com.xinan.dto.MomentDTO;
 import com.xinan.dto.MomentLikesDTO;
 import com.xinan.result.Result;
@@ -27,6 +28,8 @@ public class MomentController {
     public Result insertMoment(@RequestBody MomentDTO momentDTO)
     {
         log.info("发布安心圈动态:{}",momentDTO);
+        //再次获取一次用户id
+        momentDTO.setUserId(BaseContext.getCurrentId());
         momentService.insertMoment(momentDTO);
         return Result.success();
     }
@@ -44,6 +47,8 @@ public class MomentController {
     @ApiOperation(value = "用户对安心圈点赞操作")
     public Result addMomentLikes(@RequestBody MomentLikesDTO momentLikesDTO)
     {
+        Long userId = BaseContext.getCurrentId();
+        momentLikesDTO.setUserId(userId);
         log.info("用户{}对安心圈动态{}进行点赞",momentLikesDTO.getUserId(),momentLikesDTO.getMomentId());
         momentService.insertMomentLikes(momentLikesDTO);
         return Result.success();
@@ -68,7 +73,7 @@ public class MomentController {
     }
 
     @GetMapping("/{userId}")
-    @ApiOperation(value = "查看指定用户的安心圈")
+    @ApiOperation(value = "查看指定用户的安心圈(查看别人的安心圈)")
     public Result<List<MomentVO>> getByUserId(@PathVariable Long userId)
     {
         log.info("查看指定用户:{}的安心圈",userId);
