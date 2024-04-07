@@ -289,12 +289,14 @@ public class UserServiceImpl implements UserService {
                     .build();
             case "updateUser" -> {
                 //手机号重复性校验
-                if (userMapper.getByPhone(userDTO.getPhone()) != null) {
+                User tmp = null;
+                if ((tmp = userMapper.getByPhone(userDTO.getPhone())) != null &&
+                    !tmp.getId().equals(userDTO.getId())) {
                     throw new BaseException(UserConstant.DUPLICATE_PHONE);
                 }
                 //手机号码合法性校验
                 if (userDTO.getPhone() != null) {
-                    if (!userDTO.getPhone().matches("\\d{15,17}")) {
+                    if (!userDTO.getPhone().matches("\\d{11}")) {
                         throw new BaseException(MessageConstant.WRONG_PHONE);
                     }
                 }
