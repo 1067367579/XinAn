@@ -22,5 +22,5 @@ public class FriendDTO implements Serializable {
     @ApiModelProperty(value = "好友备注名")
     private String remarkName;
     @ApiModelProperty(value = "葬礼是否邀请用户")
-    private int invited;
+    private Integer invited;
 }

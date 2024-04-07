@@ -8,11 +8,18 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
 
 //@SpringBootTest(classes = HttpClientTest.class)
 public class HttpClientTest {
+
+    //@Test
+    public void testMethod() throws NoSuchMethodException {
+        System.out.println(HttpClientTest.class.getMethod("testMethod").getName());
+    }
 
     /**
      * 测试用httpClient发送GET请求

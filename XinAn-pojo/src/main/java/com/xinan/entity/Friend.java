@@ -28,5 +28,5 @@ public class Friend {
     @ApiModelProperty(value = "好友分类id")
     private Long friendCategoryId;
     @ApiModelProperty(value = "葬礼邀请状态")
-    private int invited;
+    private Integer invited;
 }

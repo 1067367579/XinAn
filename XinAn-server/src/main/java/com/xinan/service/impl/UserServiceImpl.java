@@ -27,6 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+import java.lang.reflect.Method;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -276,13 +277,40 @@ public class UserServiceImpl implements UserService {
      * @param userDTO 用户传输数据模型
      */
     @Override
-    public void updateUser(UserDTO userDTO) {
-        if(userMapper.getByPhone(userDTO.getPhone())!=null)
-        {
-            throw new BaseException(UserConstant.DUPLICATE_PHONE);
+    public void updateUser(UserDTO userDTO, Method invoker) {
+        User user = null;
+        switch (invoker.getName()) {
+            case "updateAvatar" -> user = User.builder()
+                    .id(userDTO.getId())
+                    .avatar(userDTO.getAvatar())
+                    .build();
+            case "updateBackgroundImage" -> user = User.builder()
+                    .id(userDTO.getId())
+                    .backgroundImage(userDTO.getBackgroundImage())
+                    .build();
+            case "updateUser" -> {
+                //手机号重复性校验
+                if (userMapper.getByPhone(userDTO.getPhone()) != null) {
+                    throw new BaseException(UserConstant.DUPLICATE_PHONE);
+                }
+                //手机号码合法性校验
+                if (userDTO.getPhone() != null) {
+                    if (!userDTO.getPhone().matches("\\d{15,17}")) {
+                        throw new BaseException(MessageConstant.WRONG_PHONE);
+                    }
+                }
+                user = User.builder()
+                        .id(userDTO.getId())
+                        .avatar(userDTO.getAvatar())
+                        .backgroundImage(userDTO.getBackgroundImage())
+                        .birthday(userDTO.getBirthday())
+                        .gender(userDTO.getGender())
+                        .phone(userDTO.getPhone())
+                        .signature(userDTO.getSignature())
+                        .username(userDTO.getUsername())
+                        .build();
+            }
         }
-        User user = new User();
-        BeanUtils.copyProperties(userDTO,user);
         userMapper.update(user);
     }
 
@@ -390,6 +418,7 @@ public class UserServiceImpl implements UserService {
                 .id(id)
                 .username(user.getUsername())
                 .phone(user.getPhone())
+                .birthday(user.getBirthday())
                 .signature(user.getSignature())
                 .gender(user.getGender())
                 .avatar(user.getAvatar())

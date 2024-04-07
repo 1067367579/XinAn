@@ -29,7 +29,7 @@ public class User {
     private String phone;
 
     @ApiModelProperty(value = "用户性别")
-    private int gender;
+    private Integer gender;
 
     @ApiModelProperty(value = "用户生日日期")
     private LocalDate birthday;

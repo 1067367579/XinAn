@@ -5,6 +5,7 @@ import com.xinan.entity.FriendCategory;
 import com.xinan.entity.User;
 import com.xinan.vo.*;
 
+import java.lang.reflect.Method;
 import java.util.List;
 
 public interface UserService {
@@ -14,7 +15,7 @@ public interface UserService {
 
     Long getDayToBirthday(Long id);
 
-    void updateUser(UserDTO userDTO);
+    void updateUser(UserDTO userDTO, Method invoker);
 
     List<FriendVO> listFriends(Long id);
 

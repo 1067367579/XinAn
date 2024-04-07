@@ -47,11 +47,12 @@ public class ProcessController {
     }
 
     //TODO 条件查询商家
+    //此处应该用请求参数的形式 而非json格式数据
     @GetMapping("/merchants")
     @ApiOperation(value = "根据地址条件查询商家")
-    public Result<List<MerchantVO>> listMerchants(@RequestBody MerchantAddressDTO merchantAddressDTO)
+    public Result<List<MerchantVO>> listMerchants(MerchantAddressDTO merchantAddressDTO)
     {
-        log.info("根据地址条件查询商家");
+        log.info("根据地址条件查询商家:{}",merchantAddressDTO);
         return Result.success();
     }
 

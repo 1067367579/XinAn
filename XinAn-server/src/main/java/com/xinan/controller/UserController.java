@@ -87,28 +87,25 @@ public class UserController {
 
     @PutMapping("/avatar")
     @ApiOperation(value = "修改用户头像")
-    public Result updateAvatar(@RequestBody UserDTO userDTO)
-    {
+    public Result updateAvatar(@RequestBody UserDTO userDTO) throws NoSuchMethodException {
         log.info("修改用户头像:{}",userDTO.getAvatar());
-        userService.updateUser(userDTO);
+        userService.updateUser(userDTO,UserController.class.getMethod("updateAvatar", UserDTO.class));
         return Result.success();
     }
 
     @PutMapping("/backgroundImage")
     @ApiOperation(value = "修改用户页背景图片")
-    public Result updateBackgroundImage(@RequestBody UserDTO userDTO)
-    {
+    public Result updateBackgroundImage(@RequestBody UserDTO userDTO) throws NoSuchMethodException {
         log.info("修改用户背景图片:{}",userDTO.getBackgroundImage());
-        userService.updateUser(userDTO);
+        userService.updateUser(userDTO,UserController.class.getMethod("updateBackgroundImage", UserDTO.class));
         return Result.success();
     }
 
     @PutMapping
     @ApiOperation(value = "修改用户基本信息")
-    public Result updateUser(@RequestBody UserDTO userDTO)
-    {
+    public Result updateUser(@RequestBody UserDTO userDTO) throws NoSuchMethodException {
         log.info("修改用户基本信息:{}",userDTO);
-        userService.updateUser(userDTO);
+        userService.updateUser(userDTO,UserController.class.getMethod("updateUser", UserDTO.class));
         return Result.success();
     }
 
