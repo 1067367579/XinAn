@@ -5,11 +5,13 @@ import com.xinan.dto.MerchantAddressDTO;
 import com.xinan.dto.ProcessDTO;
 import com.xinan.dto.ProcessOrderDTO;
 import com.xinan.result.Result;
+import com.xinan.service.ProcessService;
 import com.xinan.vo.MerchantVO;
 import com.xinan.vo.ProcessVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,14 +22,18 @@ import java.util.List;
 @Slf4j
 public class ProcessController {
 
-    //TODO 查看服务进度 按照用户查询
+    @Autowired
+    private ProcessService processService;
+
+    //查看服务进度 按照用户查询
     @GetMapping
     @ApiOperation(value = "查询当前用户服务流程")
-    public Result<ProcessVO> getByUserId()
+    public Result<List<ProcessVO>> getByUserId()
     {
         Long userId = BaseContext.getCurrentId();
         log.info("按照用户id查询服务流程:{}",userId);
-        return Result.success();
+        List<ProcessVO> list = processService.getByUserId(userId);
+        return Result.success(list);
     }
 
     //TODO 修改服务流程 添加 删除(批量删除)

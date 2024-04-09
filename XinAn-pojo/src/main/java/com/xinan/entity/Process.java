@@ -20,7 +20,7 @@ public class Process {
     @ApiModelProperty(value = "服务流程名称")
     private String name;
     @ApiModelProperty(value = "服务流程简要描述")
-    private String description;
+    private String illustrate;
     @ApiModelProperty(value = "服务流程状态")
     private Integer status;
     @ApiModelProperty(value = "服务流程排序")
