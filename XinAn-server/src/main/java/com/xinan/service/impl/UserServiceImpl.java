@@ -585,11 +585,13 @@ public class UserServiceImpl implements UserService {
             return null;
         }
         List<Long> ids = new ArrayList<>();
+        List<Long> messageIds = new ArrayList<>();
         for (Message m : messages) {
             ids.add(m.getSenderId());
+            messageIds.add(m.getId());
         }
         //要删除这些信息
-        messageMapper.deleteMessage(message);
+        messageMapper.deleteMessages(messageIds);
         //2. 再根据用户id集合到用户表中查询到信息返回
         return userMapper.getRequest(ids);
     }

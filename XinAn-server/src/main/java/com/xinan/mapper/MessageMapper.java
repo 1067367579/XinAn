@@ -19,6 +19,6 @@ public interface MessageMapper {
             "and package_category = #{packageCategory};")
     List<Message> getMessage(Message message);
 
-    @Delete("delete from message where receiver_id = #{receiverId} and package_category = #{packageCategory}")
-    void deleteMessage(Message message);
+
+    void deleteMessages(List<Long> messageIds);
 }

@@ -13,4 +13,8 @@ public class UserConstant {
     public static final Integer PET_SEND = 2;
     public static final String DEFAULT_TREASURE_IMAGE = "https://xinanv1.oss-cn-shenzhen.aliyuncs.com/default_treasure_image.png";
     public static final String DUPLICATE_PHONE = "手机号重复";
+    public static final String PASSWORD_EMPTY = "密码不能为空";
+    public static final String ACCOUNT_EMPTY = "账号不能为空";
+
+
 }
