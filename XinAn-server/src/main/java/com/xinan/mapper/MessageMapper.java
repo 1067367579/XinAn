@@ -1,7 +1,6 @@
 package com.xinan.mapper;
 
 import com.xinan.entity.Message;
-import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
