@@ -17,4 +17,5 @@ public class UserConstant {
     public static final String ACCOUNT_EMPTY = "账号不能为空";
     public static final Integer DEFAULT_PLATFORM_STATUS = 0;
     public static final String PLATFORM_NAME_EMPTY = "平台名为空";
+    public static final String PET_NAME_EMPTY = "宠物名为空";
 }
