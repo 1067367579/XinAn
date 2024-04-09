@@ -52,6 +52,11 @@ public class PasswordServiceImpl implements PasswordService {
         {
             throw new BaseException(UserConstant.ACCOUNT_EMPTY);
         }
+        if(passwordDTO.getPlatformName() == null ||
+        passwordDTO.getPlatformName().isEmpty())
+        {
+            throw new BaseException(UserConstant.PLATFORM_NAME_EMPTY);
+        }
         Password password = Password.builder()
                 .userId(BaseContext.getCurrentId())
                 .password(passwordDTO.getPassword())
