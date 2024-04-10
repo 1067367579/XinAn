@@ -148,79 +148,79 @@ public class UserServiceImpl implements UserService {
                         .name("医生确认死亡")
                         .illustrate("这里写点什么")
                         .status(StatusConstant.NOT_FINISHED)
-                        .order(1).build());
+                        .build());
         processes.add(Process.builder()
                         .userId(id)
                         .name("净身穿衣")
                         .illustrate("携带相关证件")
                         .status(StatusConstant.NOT_FINISHED)
-                        .order(2).build());
+                        .build());
         processes.add(Process.builder()
                         .userId(id)
                         .name("开具死亡证明")
                         .illustrate("携带证件")
                         .status(StatusConstant.NOT_FINISHED)
-                        .order(3).build());
+                        .build());
         processes.add(Process.builder()
                         .userId(id)
                         .name("联系殡仪馆灵车")
                         .illustrate("灵车运送,存放遗体")
                         .status(StatusConstant.NOT_FINISHED)
-                        .order(4).build());
+                       .build());
         processes.add(Process.builder()
                         .userId(id)
                         .name("搭设灵堂")
                         .illustrate("多种品类选择")
                         .status(StatusConstant.NOT_FINISHED)
-                        .order(5).build());
+                        .build());
         processes.add(Process.builder()
                         .userId(id)
                         .name("预约殡仪馆事项")
                         .illustrate("这里写点什么")
                         .status(StatusConstant.NOT_FINISHED)
-                        .order(6).build());
+                        .build());
         processes.add(Process.builder()
                         .userId(id)
                         .name("选购殡葬用品")
                         .illustrate("多种品类选择")
                         .status(StatusConstant.NOT_FINISHED)
-                        .order(7).build());
+                       .build());
         processes.add(Process.builder()
                         .userId(id)
                         .name("预备丧宴")
                         .illustrate("提前预约")
                         .status(StatusConstant.NOT_FINISHED)
-                        .order(8).build());
+                        .build());
         processes.add(Process.builder()
                         .userId(id)
                         .name("办理殡仪馆手续")
                         .illustrate("携带相关证件")
                         .status(StatusConstant.NOT_FINISHED)
-                        .order(9).build());
+                        .build());
         processes.add(Process.builder()
                         .userId(id)
                         .name("出殡仪式")
                         .illustrate("这里写点什么")
                         .status(StatusConstant.NOT_FINISHED)
-                        .order(10).build());
+                        .build());
         processes.add(Process.builder()
                         .userId(id)
                         .name("举行尊体告别仪式")
                         .illustrate("这里写点什么")
                         .status(StatusConstant.NOT_FINISHED)
-                        .order(11).build());
+                .build());
         processes.add(Process.builder()
                         .userId(id)
                         .name("尊体火化")
                         .illustrate("骨灰寄存/安葬")
                         .status(StatusConstant.NOT_FINISHED)
-                        .order(12).build());
+                .build());
         processes.add(Process.builder()
                         .userId(id)
                         .name("后续祭祀")
                         .illustrate("当地特殊习俗")
                         .status(StatusConstant.NOT_FINISHED)
-                        .order(13).build());
+                        .build());
         return processes;
     }
 

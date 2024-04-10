@@ -1,5 +1,6 @@
 package com.xinan.mapper;
 
+import com.xinan.dto.MerchantAddressDTO;
 import com.xinan.entity.Merchant;
 import com.xinan.entity.MerchantAddress;
 import com.xinan.entity.MerchantCategory;
@@ -28,4 +29,10 @@ public interface MerchantMapper {
     @Insert("insert into XinAn.user_merchant (user_id, merchant_id, create_time) values " +
             "(#{userId},#{merchantId},#{createTime})")
     void addFavorite(UserMerchant userMerchant);
+
+    List<Long> getMerchantByAddress(MerchantAddressDTO merchantAddressDTO);
+
+    @Select("select id, name, merchant_category_id, merchant_address_id, leader, phone" +
+            " from merchant where merchant_address_id = #{addressId}")
+    Merchant getByAddressId(Long addressId);
 }

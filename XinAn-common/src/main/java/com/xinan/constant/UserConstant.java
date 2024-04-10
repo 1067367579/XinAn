@@ -18,4 +18,6 @@ public class UserConstant {
     public static final Integer DEFAULT_PLATFORM_STATUS = 0;
     public static final String PLATFORM_NAME_EMPTY = "平台名为空";
     public static final String PET_NAME_EMPTY = "宠物名为空";
+    public static final String PROCESS_NAME_EMPTY = "流程名为空";
+    public static final String PROCESS_DETAIL_TITLE_EMPTY = "流程细则标题为空";
 }

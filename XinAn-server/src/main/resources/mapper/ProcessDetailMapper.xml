@@ -2,5 +2,36 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xinan.mapper.ProcessDetailMapper">
+    <insert id="insertBatch">
+        insert into XinAn.process_detail (process_id, title, content)
+        values
+            <foreach collection="processDetails" item="processDetail" separator=",">
+                (#{processDetail.processId},#{processDetail.title},#{processDetail.content})
+            </foreach>
+    </insert>
+    <update id="update">
+        update XinAn.process_detail
+        <set>
+            <if test="title!=null and title!=''">
+                title = #{title},
+            </if>
+            <if test="content!=null and content!=''">
+                content = #{content}
+            </if>
+        </set>
+        where id = #{id};
+    </update>
 
+    <delete id="deleteBatchByProcessIds">
+        delete from XinAn.process_detail where process_id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+    <delete id="deleteBatch">
+        delete from XinAn.process_detail where id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>

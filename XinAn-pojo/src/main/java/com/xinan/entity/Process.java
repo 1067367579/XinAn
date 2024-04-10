@@ -23,6 +23,4 @@ public class Process {
     private String illustrate;
     @ApiModelProperty(value = "服务流程状态")
     private Integer status;
-    @ApiModelProperty(value = "服务流程排序")
-    private Integer order;
 }

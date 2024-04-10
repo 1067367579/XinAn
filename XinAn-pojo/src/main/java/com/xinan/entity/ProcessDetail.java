@@ -21,6 +21,4 @@ public class ProcessDetail {
     private String title;
     @ApiModelProperty(value = "流程细则内容")
     private String content;
-    @ApiModelProperty(value = "该条记录在单个流程下的次序")
-    private Integer order;
 }

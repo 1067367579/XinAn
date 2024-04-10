@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @ApiModel(value = "服务流程数据传输模型")
 public class ProcessDTO {
-    @ApiModelProperty(value = "用户id")
-    private Long userId;
+    @ApiModelProperty(value = "服务简单描述")
+    private String illustrate;
     @ApiModelProperty(value = "服务流程名")
     private String name;
 }

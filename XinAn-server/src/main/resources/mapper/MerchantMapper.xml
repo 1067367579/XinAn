@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xinan.mapper.MerchantMapper">
+
+    <select id="getMerchantByAddress" resultType="java.lang.Long">
+        select id from XinAn.merchant_address
+        <where>
+            <if test="city!=null and city!=''">
+                and city = #{city}
+            </if>
+            <if test="district!=null and district!=''">
+                and district = #{district}
+            </if>
+        </where>
+    </select>
+</mapper>

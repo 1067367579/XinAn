@@ -8,4 +8,25 @@
             (#{process.userId},#{process.name},#{process.description},#{process.status},#{process.order})
         </foreach>
     </insert>
+    <update id="update">
+        update XinAn.process
+        <set>
+            <if test="name!=null and name!=''">
+                name = #{name},
+            </if>
+            <if test="illustrate!=null and illustrate!=''">
+                illustrate = #{illustrate},
+            </if>
+            <if test="status!=null">
+                status = #{status}
+            </if>
+        </set>
+        where id = #{id};
+    </update>
+    <delete id="deleteBatch">
+        delete from XinAn.process where id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>

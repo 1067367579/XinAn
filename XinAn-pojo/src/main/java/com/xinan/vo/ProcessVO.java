@@ -26,8 +26,6 @@ public class ProcessVO {
     private String illustrate;
     @ApiModelProperty(value = "流程状态 0未完成 1已完成")
     private Integer status;
-    @ApiModelProperty(value = "流程排序")
-    private Integer order;
     @ApiModelProperty(value = "流程细则集合")
     private List<ProcessDetail> detail;
 }

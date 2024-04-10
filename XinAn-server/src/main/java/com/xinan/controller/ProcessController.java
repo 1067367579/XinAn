@@ -3,7 +3,8 @@ package com.xinan.controller;
 import com.xinan.context.BaseContext;
 import com.xinan.dto.MerchantAddressDTO;
 import com.xinan.dto.ProcessDTO;
-import com.xinan.dto.ProcessOrderDTO;
+import com.xinan.entity.Process;
+import com.xinan.entity.ProcessDetail;
 import com.xinan.result.Result;
 import com.xinan.service.ProcessService;
 import com.xinan.vo.MerchantVO;
@@ -36,38 +37,98 @@ public class ProcessController {
         return Result.success(list);
     }
 
-    //TODO 修改服务流程 添加 删除(批量删除)
+    //删除服务流程 删除(批量删除)
     @DeleteMapping("/{ids}")
     @ApiOperation(value = "按照流程id批量删除流程")
     public Result deleteByIds(@PathVariable List<Long> ids)
     {
+        log.info("根据流程id集合批量删除流程:{}",ids);
+        //要把相关的流程细则id也删除
+        processService.deleteBatch(ids);
         return Result.success();
     }
 
-    //TODO 添加流程 默认是该用户的最后一个流程
-    @PutMapping
+    //添加流程 默认是该用户的最后一个流程
+    @PostMapping
     @ApiOperation("添加流程 默认是该用户的最后一个流程")
     public Result addProcess(@RequestBody ProcessDTO processDTO)
     {
+        log.info("添加流程:{}",processDTO);
+        processService.addProcess(processDTO);
         return Result.success();
     }
 
-    //TODO 条件查询商家
+    //修改某一个流程的内容
+    @PutMapping
+    @ApiOperation(value = "根据流程id修改某一个流程的内容")
+    public Result updateProcess(@RequestBody Process process)
+    {
+        log.info("根据流程ID修改某个流程的内容:{}",process);
+        processService.updateProcess(process);
+        return Result.success();
+    }
+
+    //条件查询商家
     //此处应该用请求参数的形式 而非json格式数据
     @GetMapping("/merchants")
     @ApiOperation(value = "根据地址条件查询商家")
     public Result<List<MerchantVO>> listMerchants(MerchantAddressDTO merchantAddressDTO)
     {
         log.info("根据地址条件查询商家:{}",merchantAddressDTO);
+        List<MerchantVO> list = processService.getMerchantByAddress(merchantAddressDTO);
+        return Result.success(list);
+    }
+
+    //改变流程顺序 逻辑改为删除掉现用户的所有流程之后 再按照现在的顺序进行添加
+    @PutMapping("/order")
+    @ApiOperation(value = "修改流程顺序")
+    public Result updateProcessOrder(@RequestBody List<ProcessVO> processVOS)
+    {
+        log.info("根据数据修改流程顺序");
+        //每个流程对应的流程细则怎么处理?
+        //流程细则也全部删掉重新处理
+        processService.updateProcessOrder(processVOS);
         return Result.success();
     }
 
-    //TODO 改变流程顺序
-    @PutMapping("/order")
-    @ApiOperation(value = "修改流程顺序")
-    public Result updateProcessOrder(@RequestBody List<ProcessOrderDTO> processOrderDTOs)
+    //增加流程细则
+    @ApiOperation(value = "增加流程细则接口")
+    @PostMapping("/detail")
+    public Result addProcessDetail(@RequestBody ProcessDetail processDetail)
     {
-        log.info("根据封装的数据修改流程顺序");
+        log.info("增加流程细则:{}",processDetail);
+        processService.addProcessDetail(processDetail);
+        return Result.success();
+    }
+
+    //修改流程细则
+    @PutMapping("/detail")
+    @ApiOperation(value = "根据流程细则id修改流程细则")
+    public Result updateProcessDetail(@RequestBody ProcessDetail processDetail)
+    {
+        log.info("根据流程细则id修改流程细则:{}",processDetail.getId());
+        processService.updateProcessDetail(processDetail);
+        return Result.success();
+    }
+
+    //批量删除流程细则
+    @ApiOperation(value = "根据id批量删除流程细则")
+    @DeleteMapping("/detail/{ids}")
+    public Result deleteProcessDetailBatch(@PathVariable List<Long> ids)
+    {
+        log.info("根据id批量删除流程细则:{}",ids);
+        processService.deleteProcessDetailBatch(ids);
+        return Result.success();
+    }
+
+    //改变流程细则顺序
+    @PostMapping("/detail/order")
+    @ApiOperation(value = "改变流程细则顺序")
+    public Result updateProcessDetailOrder(@RequestBody List<ProcessDetail> processDetails)
+    {
+        //逻辑 先该流程下所有的流程细则 再重新放入数据库
+        log.info("改变流程细则顺序");
+        processService.updateProcessDetailOrder(processDetails);
         return Result.success();
     }
 }
