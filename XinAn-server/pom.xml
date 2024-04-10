@@ -31,4 +31,17 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <!-- 这里可以配置一些参数，但一般情况下不需要指定 mainClass -->
+                </configuration>
+            </plugin>
+            <!-- 其他插件配置 -->
+        </plugins>
+    </build>
+
 </project>
