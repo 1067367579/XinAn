@@ -139,6 +139,16 @@ public class UserController {
         return Result.success(vo);
     }
 
+    //删除好友请求
+    @DeleteMapping("/friends/request/{id}")
+    @ApiOperation(value = "删除好友请求")
+    public Result deleteMessage(@PathVariable Long id)
+    {
+        log.info("删除好友请求:{}",id);
+        userService.deleteMessage(id);
+        return Result.success();
+    }
+
     @PostMapping("/friends")
     @ApiOperation(value = "添加好友")
     public Result addFriend(@RequestBody FriendDTO friendDTO)

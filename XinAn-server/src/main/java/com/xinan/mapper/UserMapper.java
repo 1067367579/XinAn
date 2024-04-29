@@ -1,5 +1,6 @@
 package com.xinan.mapper;
 
+import com.xinan.dto.FriendRequestDTO;
 import com.xinan.entity.User;
 import com.xinan.vo.FriendRequestVO;
 import org.apache.ibatis.annotations.Insert;
@@ -33,5 +34,5 @@ public interface UserMapper {
     User getByPhone(String phone);
 
 
-    List<FriendRequestVO> getRequest(List<Long> ids);
+    FriendRequestDTO getRequest(Long id);
 }

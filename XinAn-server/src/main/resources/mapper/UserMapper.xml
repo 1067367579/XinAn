@@ -30,11 +30,7 @@
         </set>
         where id = #{id};
     </update>
-    <select id="getRequest" resultType="com.xinan.vo.FriendRequestVO">
-        select id as userId,username,avatar,phone from user where user.id in
-                         <foreach collection="ids" item="id" open="(" separator="," close=")">
-                             #{id}
-                         </foreach>
-        ;
+    <select id="getRequest" resultType="com.xinan.dto.FriendRequestDTO">
+        select id as userId,username,avatar,phone from user where user.id = #{id};
     </select>
 </mapper>

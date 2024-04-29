@@ -19,6 +19,7 @@ import com.xinan.service.UserService;
 import com.xinan.utils.HttpClientUtil;
 import com.xinan.vo.*;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -290,15 +291,15 @@ public class UserServiceImpl implements UserService {
             case "updateUser" -> {
                 //手机号重复性校验
                 User tmp = null;
-                if ((tmp = userMapper.getByPhone(userDTO.getPhone())) != null &&
-                    !tmp.getId().equals(userDTO.getId())) {
-                    throw new BaseException(UserConstant.DUPLICATE_PHONE);
-                }
                 //手机号码合法性校验
                 if (userDTO.getPhone() != null) {
                     if (!userDTO.getPhone().matches("\\d{11}")) {
                         throw new BaseException(MessageConstant.WRONG_PHONE);
                     }
+                }
+                if ((tmp = userMapper.getByPhone(userDTO.getPhone())) != null &&
+                    !tmp.getId().equals(userDTO.getId())) {
+                    throw new BaseException(UserConstant.DUPLICATE_PHONE);
                 }
                 user = User.builder()
                         .id(userDTO.getId())
@@ -578,22 +579,30 @@ public class UserServiceImpl implements UserService {
                 .receiverId(userId)
                 .packageCategory(UserConstant.FRIEND_REQUEST)
                 .build();
-        //1. 根据用户id和信息种类去信息表中查到信息类
+        //根据用户id和信息种类去信息表中查到信息类
         List<Message> messages = messageMapper.getMessage(message);
         if(messages.isEmpty())
         {
             return null;
         }
-        List<Long> ids = new ArrayList<>();
-        List<Long> messageIds = new ArrayList<>();
+        List<FriendRequestVO> vos = new ArrayList<>();
         for (Message m : messages) {
-            ids.add(m.getSenderId());
-            messageIds.add(m.getId());
+            Long senderId = m.getSenderId();
+            Long messageId = m.getId();
+            FriendRequestDTO request = userMapper.getRequest(senderId);
+            FriendRequestVO requestVO = new FriendRequestVO();
+            BeanUtils.copyProperties(request,requestVO);
+            requestVO.setId(messageId);
+            vos.add(requestVO);
         }
-        //要删除这些信息
-        messageMapper.deleteMessages(messageIds);
-        //2. 再根据用户id集合到用户表中查询到信息返回
-        return userMapper.getRequest(ids);
+        return vos;
+    }
+
+    @Override
+    public void deleteMessage(Long id) {
+        List<Long> ids = new ArrayList<>();
+        ids.add(id);
+        messageMapper.deleteMessages(ids);
     }
 
 

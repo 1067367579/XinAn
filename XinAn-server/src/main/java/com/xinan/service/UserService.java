@@ -44,4 +44,6 @@ public interface UserService {
     void sendRequest(MessageDTO messageDTO);
 
     List<FriendRequestVO> listMessage(Long userId);
+
+    void deleteMessage(Long id);
 }
