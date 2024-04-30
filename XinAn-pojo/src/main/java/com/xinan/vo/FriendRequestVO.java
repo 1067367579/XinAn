@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @ApiModel(value = "返回给前端的好友请求数据模型")
 public class FriendRequestVO {
     @ApiModelProperty(value = "请求信息id")
-    private Long id;
+    private Long messageId;
     @ApiModelProperty(value = "用户id")
     private Long userId;
     @ApiModelProperty(value = "用户名")

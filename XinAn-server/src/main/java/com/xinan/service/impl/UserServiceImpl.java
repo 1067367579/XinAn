@@ -597,7 +597,7 @@ public class UserServiceImpl implements UserService {
             FriendRequestDTO request = userMapper.getRequest(senderId);
             FriendRequestVO requestVO = new FriendRequestVO();
             BeanUtils.copyProperties(request,requestVO);
-            requestVO.setId(messageId);
+            requestVO.setMessageId(messageId);
             vos.add(requestVO);
         }
         return vos;
