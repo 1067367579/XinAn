@@ -128,7 +128,7 @@ public class UserController {
         return Result.success();
     }
 
-    //x查看当前用户好友请求
+    //查看当前用户好友请求
     @GetMapping("/friends/request")
     @ApiOperation(value = "查看好友请求")
     public Result<List<FriendRequestVO>> listMessage()

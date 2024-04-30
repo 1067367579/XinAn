@@ -15,6 +15,8 @@ import java.io.Serializable;
 @Data
 @Builder
 public class FriendDTO implements Serializable {
+    @ApiModelProperty(value = "好友请求信息id")
+    private Long messageId;
     @ApiModelProperty(value = "好友的用户id")
     private Long id;
     @ApiModelProperty(value = "好友分类id")

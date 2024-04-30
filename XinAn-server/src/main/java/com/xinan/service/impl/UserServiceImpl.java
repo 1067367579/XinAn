@@ -369,9 +369,12 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void addFriend(FriendDTO friendDTO) {
-        Long userId = BaseContext.getCurrentId();
-        Long friendId = friendDTO.getId();
-        Long friendCategoryId = friendDTO.getFriendCategoryId();
+        //去信息表中将对方给自己的好友分类拿出来
+        Long srcFriendCategoryId = messageMapper.getById(friendDTO.getMessageId()).getPackageId();
+        Long userId = BaseContext.getCurrentId();//当前用户 也就是接受者的id
+        Long friendId = friendDTO.getId();//发送者的id
+        //自己给对方设置的好友分类
+        Long destFriendCategoryId = friendDTO.getFriendCategoryId();
         String remarkName = friendDTO.getRemarkName();
         User friend = userMapper.getById(friendId);
         User user = userMapper.getById(userId);
@@ -385,7 +388,7 @@ public class UserServiceImpl implements UserService {
                 .userId(userId)
                 .friendId(friendId)
                 .remarkName(remarkName)
-                .friendCategoryId(friendCategoryId)
+                .friendCategoryId(destFriendCategoryId)
                 .createTime(createTime)
                 //表示未邀请该好友
                 .invited(StatusConstant.NOT_FINISHED)
@@ -395,7 +398,7 @@ public class UserServiceImpl implements UserService {
                 .userId(friendId)
                 .friendId(userId)
                 .remarkName(remarkName)
-                .friendCategoryId(friendCategoryId)
+                .friendCategoryId(srcFriendCategoryId)
                 .createTime(createTime)
                 //表示未邀请该好友
                 .invited(StatusConstant.NOT_FINISHED)
@@ -550,6 +553,7 @@ public class UserServiceImpl implements UserService {
     /**
      * 发送好友请求 添加进信息表
      * @param messageDTO 信息数据传输模型
+     * 修改为好友发送请求时 包内容id 为 好友分类id
      */
     @Override
     public void sendRequest(MessageDTO messageDTO) {
@@ -569,6 +573,7 @@ public class UserServiceImpl implements UserService {
                 .senderId(senderId)
                 .receiverId(receiverId)
                 .packageCategory(packageCategory)
+                .packageId(messageDTO.getPackageId())
                 .build();
         messageMapper.insert(message);
     }

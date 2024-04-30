@@ -20,4 +20,7 @@ public interface MessageMapper {
 
 
     void deleteMessages(List<Long> messageIds);
+
+    @Select("select id, sender_id, receiver_id, package_id, package_category from message where id = #{id}")
+    Message getById(Long id);
 }
