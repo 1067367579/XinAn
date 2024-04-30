@@ -2,13 +2,10 @@ package com.xinan.mapper;
 
 import com.xinan.dto.FriendRequestDTO;
 import com.xinan.entity.User;
-import com.xinan.vo.FriendRequestVO;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
-
-import java.util.List;
 
 @Mapper
 public interface UserMapper {
