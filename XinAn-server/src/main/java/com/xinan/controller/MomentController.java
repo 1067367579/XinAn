@@ -1,8 +1,10 @@
 package com.xinan.controller;
 
+import com.github.pagehelper.Page;
 import com.xinan.context.BaseContext;
 import com.xinan.dto.MomentDTO;
 import com.xinan.dto.MomentLikesDTO;
+import com.xinan.result.PageResult;
 import com.xinan.result.Result;
 import com.xinan.service.MomentService;
 import com.xinan.vo.MomentVO;
@@ -64,20 +66,20 @@ public class MomentController {
     }
 
     @GetMapping
-    @ApiOperation(value = "查看所有的安心圈")
-    public Result<List<MomentVO>> listAll()
+    @ApiOperation(value = "分页查看所有的安心圈")
+    public Result<PageResult> listAll(@RequestParam Integer page,@RequestParam Integer pageSize)
     {
-        log.info("查看所有的安心圈");
-        List<MomentVO> list = momentService.listAll();
+        log.info("查看所有的安心圈,页码:{},每页显示记录数:{}",page,pageSize);
+        PageResult list = momentService.listAll(page,pageSize);
         return Result.success(list);
     }
 
     @GetMapping("/{userId}")
-    @ApiOperation(value = "查看指定用户的安心圈(查看别人的安心圈)")
-    public Result<List<MomentVO>> getByUserId(@PathVariable Long userId)
+    @ApiOperation(value = "分页查看指定用户的安心圈(查看别人的安心圈)")
+    public Result<PageResult> getByUserId(@PathVariable Long userId,@RequestParam Integer page,@RequestParam Integer pageSize)
     {
-        log.info("查看指定用户:{}的安心圈",userId);
-        List<MomentVO> list = momentService.getMomentsByUserId(userId);
+        log.info("查看指定用户:{}的安心圈,页码:{},每页显示记录数:{}",userId,page,pageSize);
+        PageResult list = momentService.getMomentsByUserId(userId,page,pageSize);
         return Result.success(list);
     }
 

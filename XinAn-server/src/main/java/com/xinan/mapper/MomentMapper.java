@@ -28,7 +28,7 @@ public interface MomentMapper {
 
     @Select("select id, user_id, title, sub_title, photo1, photo2, photo3, photo4, begin_date, end_date, create_time" +
             " from moment order by create_time desc")
-    List<Moment> listAll();
+    List<Moment> listAll(Integer page,Integer pageSize);
 
     @Select("select id, user_id, moment_id, create_time " +
             "from moment_likes where moment_id = #{momentId}")

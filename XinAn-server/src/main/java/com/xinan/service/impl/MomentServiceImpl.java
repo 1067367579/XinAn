@@ -1,5 +1,7 @@
 package com.xinan.service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.xinan.context.BaseContext;
 import com.xinan.dto.MomentDTO;
 import com.xinan.dto.MomentLikesDTO;
@@ -8,6 +10,7 @@ import com.xinan.entity.MomentLikes;
 import com.xinan.entity.User;
 import com.xinan.mapper.MomentMapper;
 import com.xinan.mapper.UserMapper;
+import com.xinan.result.PageResult;
 import com.xinan.service.MomentService;
 import com.xinan.vo.MomentLikesVO;
 import com.xinan.vo.MomentVO;
@@ -70,10 +73,14 @@ public class MomentServiceImpl implements MomentService {
     }
 
     @Override
-    public List<MomentVO> listAll() {
+    public PageResult listAll(Integer page, Integer pageSize) {
         //先将所有的Moment对象查询出来
-        List<Moment> momentList = momentMapper.listAll();
-        return getMomentVOS(momentList);
+        PageHelper.startPage(page,pageSize);
+        List<Moment> momentList = momentMapper.listAll(page,pageSize);
+        Page<Moment> momentPage = (Page<Moment>) momentList;
+        List<Moment> records = momentPage.getResult();
+        long total = momentPage.getTotal();
+        return new PageResult(total,getMomentVOS(records));
     }
 
     private List<MomentVO> getMomentVOS(List<Moment> momentList) {
@@ -117,10 +124,14 @@ public class MomentServiceImpl implements MomentService {
     }
 
     @Override
-    public List<MomentVO> getMomentsByUserId(Long userId) {
+    public PageResult getMomentsByUserId(Long userId,Integer page,Integer pageSize) {
         //先将所有的Moment对象查询出来
+        PageHelper.startPage(page,pageSize);
         List<Moment> momentList = momentMapper.getByUserId(userId);
-        return getMomentVOS(momentList);
+        Page<Moment> momentPage = (Page<Moment>) momentList;
+        List<Moment> records = momentPage.getResult();
+        long total = momentPage.getTotal();
+        return new PageResult(total,getMomentVOS(records));
     }
 
     @Override

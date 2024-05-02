@@ -1,7 +1,9 @@
 package com.xinan.service;
 
+import com.github.pagehelper.Page;
 import com.xinan.dto.MomentDTO;
 import com.xinan.dto.MomentLikesDTO;
+import com.xinan.result.PageResult;
 import com.xinan.vo.MomentVO;
 
 import java.util.List;
@@ -15,9 +17,9 @@ public interface MomentService {
 
     void removeMomentLikes(Long momentId);
 
-    List<MomentVO> listAll();
+    PageResult listAll(Integer page, Integer pageSize);
 
-    List<MomentVO> getMomentsByUserId(Long userId);
+    PageResult getMomentsByUserId(Long userId,Integer page,Integer pageSize);
 
     void deleteById(Long id);
 }
