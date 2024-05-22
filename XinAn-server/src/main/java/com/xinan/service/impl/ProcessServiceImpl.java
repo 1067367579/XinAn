@@ -5,13 +5,17 @@ import com.xinan.constant.UserConstant;
 import com.xinan.context.BaseContext;
 import com.xinan.dto.MerchantAddressDTO;
 import com.xinan.dto.ProcessDTO;
+import com.xinan.entity.Merchant;
+import com.xinan.entity.MerchantCategory;
 import com.xinan.entity.Process;
-import com.xinan.entity.*;
+import com.xinan.entity.ProcessDetail;
 import com.xinan.exception.BaseException;
 import com.xinan.mapper.MerchantMapper;
 import com.xinan.mapper.ProcessDetailMapper;
 import com.xinan.mapper.ProcessMapper;
 import com.xinan.service.ProcessService;
+import com.xinan.utils.BaiduMapUtil;
+import com.xinan.utils.BaiduMapUtil.Point;
 import com.xinan.vo.MerchantVO;
 import com.xinan.vo.ProcessVO;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -35,6 +40,9 @@ public class ProcessServiceImpl implements ProcessService {
 
     @Autowired
     private ProcessDetailMapper processDetailMapper;
+
+    @Autowired
+    private BaiduMapUtil baiduMapUtil;
 
     @Override
     public List<ProcessVO> getByUserId(Long userId) {
@@ -119,27 +127,47 @@ public class ProcessServiceImpl implements ProcessService {
     }
 
     @Override
+    @Transactional
     public List<MerchantVO> getMerchantByAddress(MerchantAddressDTO merchantAddressDTO) {
-        //1. 在地址表中查询出符合条件的商户id
-        List<Long> addressIds = merchantMapper.getMerchantByAddress(merchantAddressDTO);
-        List<MerchantVO> merchantVOS = new ArrayList<>();
-        //2. 再根据商户id集合到商户表中查询出商户信息返回
-        for (Long addressId : addressIds) {
-            Merchant merchant = merchantMapper.getByAddressId(addressId);
-            if(merchant == null) continue;
+        //现在的问题是 请求接口响应速度太慢 需要降低时间资源消耗 将地址表合并到商家表 商家表与地址表是一对一的关系
+        //1. 查询出符合响应地址条件的商户
+        List<Merchant> merchants = merchantMapper.getMerchantByAddress(merchantAddressDTO);
+        //如果符合条件的商户列表为空 直接返回null
+        if(merchants == null || merchants.isEmpty())
+        {
+            return null;
+        }
+        //用户所在坐标
+        Point userPoint = new Point(merchantAddressDTO.getLat(), merchantAddressDTO.getLng());
+
+        // 获取商户分类和地址信息并行处理 利用并行流进行集合处理
+        return merchants.parallelStream().map(merchant -> {
+            // 获取分类信息
             MerchantCategory category = merchantMapper.getCategoryById(merchant.getMerchantCategoryId());
-            MerchantAddress address = merchantMapper.getAddressById(merchant.getMerchantAddressId());
-            MerchantVO merchantVO = MerchantVO.builder()
+
+            // 拼接地址字符串
+            String addressStr = merchant.getCity() + merchant.getDistrict() + merchant.getDetail();
+
+            //算好用户与该商家的距离
+            Point merchantPoint = new Point(merchant.getLat(), merchant.getLng());
+            Integer distance = baiduMapUtil.getDistance(userPoint, merchantPoint);
+
+            // 返回商户视图对象
+            return MerchantVO.builder()
                     .id(merchant.getId())
                     .phone(merchant.getPhone())
                     .leader(merchant.getLeader())
                     .merchantCategory(category.getName())
-                    .merchantAddress(address.getCity()+address.getDistrict())
+                    .merchantAddress(addressStr)
                     .name(merchant.getName())
+                    .distance(distance)
                     .build();
-            merchantVOS.add(merchantVO);
-        }
-        return merchantVOS;
+        }).sorted(new Comparator<MerchantVO>() {
+            @Override
+            public int compare(MerchantVO o1, MerchantVO o2) {
+                return o1.getDistance() - o2.getDistance();
+            }
+        }).collect(Collectors.toList());
     }
 
     @Transactional
@@ -167,6 +195,31 @@ public class ProcessServiceImpl implements ProcessService {
             details.forEach(processDetail -> processDetail.setProcessId(process.getId()));
             processDetailMapper.insertBatch(details);
         }
+    }
+
+    @Override
+    public void addMerchant(Merchant merchant) {
+        //通过地址信息获取坐标
+        String address = merchant.getCity() + merchant.getDistrict() + merchant.getDetail();
+        Point point = baiduMapUtil.getPointByAddress(address);
+        merchant.setLat(point.getLat());
+        merchant.setLng(point.getLng());
+        merchantMapper.addMerchant(merchant);
+    }
+
+    @Override
+    public void updateMerchant(Merchant merchant) {
+        //通过地址信息获取坐标
+        String address = merchant.getCity() + merchant.getDistrict() + merchant.getDetail();
+        Point point = baiduMapUtil.getPointByAddress(address);
+        merchant.setLat(point.getLat());
+        merchant.setLng(point.getLng());
+        merchantMapper.updateMerchant(merchant);
+    }
+
+    public void deleteMerchant(Long merchantId)
+    {
+        merchantMapper.deleteMerchant(merchantId);
     }
 
 

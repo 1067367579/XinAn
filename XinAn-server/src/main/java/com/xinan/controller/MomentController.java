@@ -1,20 +1,16 @@
 package com.xinan.controller;
 
-import com.github.pagehelper.Page;
 import com.xinan.context.BaseContext;
 import com.xinan.dto.MomentDTO;
 import com.xinan.dto.MomentLikesDTO;
 import com.xinan.result.PageResult;
 import com.xinan.result.Result;
 import com.xinan.service.MomentService;
-import com.xinan.vo.MomentVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/user/moment")
@@ -27,7 +23,7 @@ public class MomentController {
 
     @PostMapping
     @ApiOperation(value = "发布新的安心圈动态")
-    public Result insertMoment(@RequestBody MomentDTO momentDTO)
+    public Result<Object> insertMoment(@RequestBody MomentDTO momentDTO)
     {
         log.info("发布安心圈动态:{}",momentDTO);
         //再次获取一次用户id
@@ -38,7 +34,7 @@ public class MomentController {
 
     @PutMapping
     @ApiOperation(value = "改动安心圈动态")
-    public Result updateMoment(@RequestBody MomentDTO momentDTO)
+    public Result<Object> updateMoment(@RequestBody MomentDTO momentDTO)
     {
         log.info("修改安心圈动态:{}",momentDTO);
         momentService.updateMoment(momentDTO);
@@ -47,7 +43,7 @@ public class MomentController {
 
     @PostMapping("/likes")
     @ApiOperation(value = "用户对安心圈点赞操作")
-    public Result addMomentLikes(@RequestBody MomentLikesDTO momentLikesDTO)
+    public Result<Object> addMomentLikes(@RequestBody MomentLikesDTO momentLikesDTO)
     {
         Long userId = BaseContext.getCurrentId();
         momentLikesDTO.setUserId(userId);
@@ -58,7 +54,7 @@ public class MomentController {
 
     @DeleteMapping("/likes/{momentId}")
     @ApiOperation(value = "用户根据安心圈id撤销点赞")
-    public Result removeMomentLikes(@PathVariable Long momentId)
+    public Result<Object> removeMomentLikes(@PathVariable Long momentId)
     {
         log.info("用户根据安心圈id撤销点赞:{}",momentId);
         momentService.removeMomentLikes(momentId);
@@ -85,7 +81,7 @@ public class MomentController {
 
     @DeleteMapping("/{id}")
     @ApiOperation(value = "根据id删除安心圈动态")
-    public Result deleteById(@PathVariable Long id)
+    public Result<Object> deleteById(@PathVariable Long id)
     {
         //默认前端 已经完成删除校验
         log.info("根据id删除安心圈动态:{}",id);

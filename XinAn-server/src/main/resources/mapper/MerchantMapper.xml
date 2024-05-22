@@ -2,9 +2,42 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xinan.mapper.MerchantMapper">
+    <update id="updateMerchant" parameterType="com.xinan.entity.Merchant">
+        update merchant
+        <set>
+            <if test="name != null and name !='' ">
+                name = #{name},
+            </if>
+            <if test="merchantCategoryId != null">
+                merchant_category_id = #{merchantCategoryId},
+            </if>
+            <if test="leader != null and leader!=''">
+                leader = #{leader},
+            </if>
+            <if test="phone != null and phone!=''">
+                phone = #{phone},
+            </if>
+            <if test="city != null and city!='' ">
+                city = #{city},
+            </if>
+            <if test="district != null and district!=''">
+                district = #{district},
+            </if>
+            <if test="detail != null and detail!= ''">
+                detail = #{detail},
+            </if>
+            <if test="lat != null">
+                lat = #{lat},
+            </if>
+            <if test="lng != null">
+                lng = #{lng},
+            </if>
+        </set>
+        where id = #{id};
+    </update>
 
-    <select id="getMerchantByAddress" resultType="java.lang.Long">
-        select id from XinAn.merchant_address
+    <select id="getMerchantByAddress" resultType="com.xinan.entity.Merchant">
+        select id, name, merchant_category_id, leader, phone, city, district, detail, lat, lng from XinAn.merchant
         <where>
             <if test="city!=null and city!=''">
                 and city = #{city}

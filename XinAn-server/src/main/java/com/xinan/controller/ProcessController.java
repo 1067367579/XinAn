@@ -3,6 +3,7 @@ package com.xinan.controller;
 import com.xinan.context.BaseContext;
 import com.xinan.dto.MerchantAddressDTO;
 import com.xinan.dto.ProcessDTO;
+import com.xinan.entity.Merchant;
 import com.xinan.entity.Process;
 import com.xinan.entity.ProcessDetail;
 import com.xinan.result.Result;
@@ -40,7 +41,7 @@ public class ProcessController {
     //删除服务流程 删除(批量删除)
     @DeleteMapping("/{ids}")
     @ApiOperation(value = "按照流程id批量删除流程")
-    public Result deleteByIds(@PathVariable List<Long> ids)
+    public Result<Object> deleteByIds(@PathVariable List<Long> ids)
     {
         log.info("根据流程id集合批量删除流程:{}",ids);
         //要把相关的流程细则id也删除
@@ -51,7 +52,7 @@ public class ProcessController {
     //添加流程 默认是该用户的最后一个流程
     @PostMapping
     @ApiOperation("添加流程 默认是该用户的最后一个流程")
-    public Result addProcess(@RequestBody ProcessDTO processDTO)
+    public Result<Object> addProcess(@RequestBody ProcessDTO processDTO)
     {
         log.info("添加流程:{}",processDTO);
         processService.addProcess(processDTO);
@@ -61,7 +62,7 @@ public class ProcessController {
     //修改某一个流程的内容
     @PutMapping
     @ApiOperation(value = "根据流程id修改某一个流程的内容")
-    public Result updateProcess(@RequestBody Process process)
+    public Result<Object> updateProcess(@RequestBody Process process)
     {
         log.info("根据流程ID修改某个流程的内容:{}",process);
         processService.updateProcess(process);
@@ -75,14 +76,41 @@ public class ProcessController {
     public Result<List<MerchantVO>> listMerchants(MerchantAddressDTO merchantAddressDTO)
     {
         log.info("根据地址条件查询商家:{}",merchantAddressDTO);
-        List<MerchantVO> list = processService.getMerchantByAddress(merchantAddressDTO);
-        return Result.success(list);
+        List<MerchantVO> merchantVOS = processService.getMerchantByAddress(merchantAddressDTO);
+        return Result.success(merchantVOS);
+    }
+
+    @PostMapping("/merchants")
+    @ApiOperation(value = "添加商家")
+    public Result<Object> addMerchants(Merchant merchant)
+    {
+        log.info("添加商家:{}",merchant);
+        processService.addMerchant(merchant);
+        return Result.success();
+    }
+
+    @PutMapping("/merchants")
+    @ApiOperation(value = "修改商家")
+    public Result<Object> updateMerchants(@RequestBody Merchant merchant)
+    {
+        log.info("修改商家:{}",merchant);
+        processService.updateMerchant(merchant);
+        return Result.success();
+    }
+
+    @DeleteMapping("/merchants/{id}")
+    @ApiOperation(value = "删除商家")
+    public Result<Object> deleteMerchants(@PathVariable Long id)
+    {
+        log.info("删除商家:{}",id);
+        processService.deleteMerchant(id);
+        return Result.success();
     }
 
     //改变流程顺序 逻辑改为删除掉现用户的所有流程之后 再按照现在的顺序进行添加
     @PutMapping("/order")
     @ApiOperation(value = "修改流程顺序")
-    public Result updateProcessOrder(@RequestBody List<ProcessVO> processVOS)
+    public Result<Object> updateProcessOrder(@RequestBody List<ProcessVO> processVOS)
     {
         log.info("根据数据修改流程顺序");
         //每个流程对应的流程细则怎么处理?
@@ -94,7 +122,7 @@ public class ProcessController {
     //增加流程细则
     @ApiOperation(value = "增加流程细则接口")
     @PostMapping("/detail")
-    public Result addProcessDetail(@RequestBody ProcessDetail processDetail)
+    public Result<Object> addProcessDetail(@RequestBody ProcessDetail processDetail)
     {
         log.info("增加流程细则:{}",processDetail);
         processService.addProcessDetail(processDetail);
@@ -104,7 +132,7 @@ public class ProcessController {
     //修改流程细则
     @PutMapping("/detail")
     @ApiOperation(value = "根据流程细则id修改流程细则")
-    public Result updateProcessDetail(@RequestBody ProcessDetail processDetail)
+    public Result<Object> updateProcessDetail(@RequestBody ProcessDetail processDetail)
     {
         log.info("根据流程细则id修改流程细则:{}",processDetail.getId());
         processService.updateProcessDetail(processDetail);
@@ -114,7 +142,7 @@ public class ProcessController {
     //批量删除流程细则
     @ApiOperation(value = "根据id批量删除流程细则")
     @DeleteMapping("/detail/{ids}")
-    public Result deleteProcessDetailBatch(@PathVariable List<Long> ids)
+    public Result<Object> deleteProcessDetailBatch(@PathVariable List<Long> ids)
     {
         log.info("根据id批量删除流程细则:{}",ids);
         processService.deleteProcessDetailBatch(ids);
@@ -124,7 +152,7 @@ public class ProcessController {
     //改变流程细则顺序
     @PostMapping("/detail/order")
     @ApiOperation(value = "改变流程细则顺序")
-    public Result updateProcessDetailOrder(@RequestBody List<ProcessDetail> processDetails)
+    public Result<Object> updateProcessDetailOrder(@RequestBody List<ProcessDetail> processDetails)
     {
         //逻辑 先该流程下所有的流程细则 再重新放入数据库
         log.info("改变流程细则顺序");

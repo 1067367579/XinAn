@@ -1,7 +1,7 @@
 package com.xinan.service.impl;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
 import com.xinan.constant.MessageConstant;
 import com.xinan.constant.StatusConstant;
 import com.xinan.constant.UserConstant;
@@ -290,7 +290,7 @@ public class UserServiceImpl implements UserService {
                     .build();
             case "updateUser" -> {
                 //手机号重复性校验
-                User tmp = null;
+                User tmp;
                 //手机号码合法性校验
                 if (userDTO.getPhone() != null) {
                     if (!userDTO.getPhone().matches("\\d{11}")) {
@@ -318,8 +318,8 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 将该用户所有好友查询出来 以VO集合的形式返回给前端
-     * @param id
-     * @return
+     * @param id 用户id
+     * @return 所有好友
      */
     @Override
     public List<FriendVO> listFriends(Long id) {
@@ -489,14 +489,12 @@ public class UserServiceImpl implements UserService {
         List<Long> ids = merchantMapper.listFavoritesIds(id);
         for (Long merchantId : ids) {
             Merchant merchant = merchantMapper.getById(merchantId);
-            Long addressId = merchant.getMerchantAddressId();
             Long categoryId = merchant.getMerchantCategoryId();
-            MerchantAddress address = merchantMapper.getAddressById(addressId);
             MerchantCategory category = merchantMapper.getCategoryById(categoryId);
             list.add(MerchantVO.builder()
                             .id(merchant.getId())
                             .name(merchant.getName())
-                            .merchantAddress(address.getCity()+address.getDistrict()+address.getDetail())
+                            .merchantAddress(merchant.getCity()+merchant+ merchant.getDistrict()+merchant.getDetail())
                             .merchantCategory(category.getName())
                             .leader(merchant.getLeader())
                             .phone(merchant.getPhone())

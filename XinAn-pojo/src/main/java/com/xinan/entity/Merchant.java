@@ -19,10 +19,18 @@ public class Merchant {
     private String name;
     @ApiModelProperty(value = "商家分类id")
     private Long merchantCategoryId;
-    @ApiModelProperty(value = "商家地址id")
-    private Long merchantAddressId;
     @ApiModelProperty(value = "负责人")
     private String leader;
     @ApiModelProperty(value = "手机号")
     private String phone;
+    @ApiModelProperty(value = "城市名")
+    private String city;
+    @ApiModelProperty(value = "区/县名")
+    private String district;
+    @ApiModelProperty(value = "详细地址")
+    private String detail;
+    @ApiModelProperty(value = "商家所在位置的纬度")
+    private Double lat;
+    @ApiModelProperty(value = "商家所在位置的经度")
+    private Double lng;
 }

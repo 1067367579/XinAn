@@ -13,6 +13,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @ApiModel(value = "用户按地址查询商家条件数据传输模型")
 public class MerchantAddressDTO {
+    @ApiModelProperty(value = "用户位置纬度")
+    private Double lat;
+    @ApiModelProperty(value = "用户位置经度")
+    private Double lng;
     @ApiModelProperty(value = "城市名")
     private String city;
     @ApiModelProperty(value = "区/县/镇名")

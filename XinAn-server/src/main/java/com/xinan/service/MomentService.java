@@ -1,12 +1,8 @@
 package com.xinan.service;
 
-import com.github.pagehelper.Page;
 import com.xinan.dto.MomentDTO;
 import com.xinan.dto.MomentLikesDTO;
 import com.xinan.result.PageResult;
-import com.xinan.vo.MomentVO;
-
-import java.util.List;
 
 public interface MomentService {
     void insertMoment(MomentDTO momentDTO);

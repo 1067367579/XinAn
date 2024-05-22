@@ -2,6 +2,7 @@ package com.xinan.service;
 
 import com.xinan.dto.MerchantAddressDTO;
 import com.xinan.dto.ProcessDTO;
+import com.xinan.entity.Merchant;
 import com.xinan.entity.Process;
 import com.xinan.entity.ProcessDetail;
 import com.xinan.vo.MerchantVO;
@@ -29,4 +30,10 @@ public interface ProcessService {
     List<MerchantVO> getMerchantByAddress(MerchantAddressDTO merchantAddressDTO);
 
     void updateProcessOrder(List<ProcessVO> processVOS);
+
+    void addMerchant(Merchant merchant);
+
+    void updateMerchant(Merchant merchant);
+
+    void deleteMerchant(Long id);
 }

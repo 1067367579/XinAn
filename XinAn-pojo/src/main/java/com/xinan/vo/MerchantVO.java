@@ -25,4 +25,6 @@ public class MerchantVO {
     private String leader;
     @ApiModelProperty(value = "手机号")
     private String phone;
+    @ApiModelProperty(value = "距离")
+    private Integer distance;
 }
