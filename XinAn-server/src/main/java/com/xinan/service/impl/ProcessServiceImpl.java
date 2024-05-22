@@ -129,7 +129,6 @@ public class ProcessServiceImpl implements ProcessService {
     @Override
     @Transactional
     public List<MerchantVO> getMerchantByAddress(MerchantAddressDTO merchantAddressDTO) {
-        //现在的问题是 请求接口响应速度太慢 需要降低时间资源消耗 将地址表合并到商家表 商家表与地址表是一对一的关系
         //1. 查询出符合响应地址条件的商户
         List<Merchant> merchants = merchantMapper.getMerchantByAddress(merchantAddressDTO);
         //如果符合条件的商户列表为空 直接返回null
@@ -137,6 +136,7 @@ public class ProcessServiceImpl implements ProcessService {
         {
             return null;
         }
+
         //用户所在坐标
         Point userPoint = new Point(merchantAddressDTO.getLat(), merchantAddressDTO.getLng());
 
@@ -148,9 +148,14 @@ public class ProcessServiceImpl implements ProcessService {
             // 拼接地址字符串
             String addressStr = merchant.getCity() + merchant.getDistrict() + merchant.getDetail();
 
-            //算好用户与该商家的距离
+            //算好用户与该商家的距离,如果用户给了定位权限,计算距离
             Point merchantPoint = new Point(merchant.getLat(), merchant.getLng());
-            Integer distance = baiduMapUtil.getDistance(userPoint, merchantPoint);
+
+            Integer distance = 0;
+            if(merchantAddressDTO.getLat()!=null && merchantAddressDTO.getLng()!=null)
+            {
+                distance = baiduMapUtil.getDistance(userPoint, merchantPoint);
+            }
 
             // 返回商户视图对象
             return MerchantVO.builder()

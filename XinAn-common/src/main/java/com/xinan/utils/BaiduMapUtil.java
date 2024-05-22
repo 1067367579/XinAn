@@ -37,6 +37,11 @@ public class BaiduMapUtil {
         {
             return lat+","+lng;
         }
+        public static Double straightDist(Point point1, Point point2)
+        {
+            return Math.sqrt(Math.pow(Math.abs(point1.lng - point2.lng),2)+
+                    Math.pow(Math.abs(point1.lat - point2.lat),2));
+        }
     }
 
     /**
