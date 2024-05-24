@@ -363,16 +363,21 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * 添加好友操作
+     * 添加好友操作(修改为无法重复添加好友)
      * @param friendDTO 好友数据传输模型
      */
     @Override
     @Transactional
     public void addFriend(FriendDTO friendDTO) {
         //去信息表中将对方给自己的好友分类拿出来
-        Long srcFriendCategoryId = messageMapper.getById(friendDTO.getMessageId()).getPackageId();
         Long userId = BaseContext.getCurrentId();//当前用户 也就是接受者的id
         Long friendId = friendDTO.getId();//发送者的id
+        if(friendMapper.getByUserIdAndFriendId(Friend.builder().userId(userId).friendId(friendId).build())!=null
+            || friendMapper.getByUserIdAndFriendId(Friend.builder().userId(friendId).friendId(userId).build())!=null)
+        {
+            throw new BaseException(MessageConstant.ALREADY_FRIEND);
+        }
+        Long srcFriendCategoryId = messageMapper.getById(friendDTO.getMessageId()).getPackageId();
         //自己给对方设置的好友分类
         Long destFriendCategoryId = friendDTO.getFriendCategoryId();
         String remarkName = friendDTO.getRemarkName();
