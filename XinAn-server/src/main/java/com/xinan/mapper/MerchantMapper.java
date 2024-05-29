@@ -38,4 +38,6 @@ public interface MerchantMapper {
 
     @Delete("delete from XinAn.merchant where id = #{id}")
     void deleteMerchant(Long id);
+
+    void insertBatch(List<Merchant> merchants);
 }

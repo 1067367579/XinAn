@@ -227,5 +227,9 @@ public class ProcessServiceImpl implements ProcessService {
         merchantMapper.deleteMerchant(merchantId);
     }
 
-
+    @Override
+    public void addAllMerchant() {
+        List<Merchant> merchants = baiduMapUtil.getMerchants();
+        merchantMapper.insertBatch(merchants);
+    }
 }

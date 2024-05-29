@@ -36,4 +36,6 @@ public interface ProcessService {
     void updateMerchant(Merchant merchant);
 
     void deleteMerchant(Long id);
+
+    void addAllMerchant();
 }

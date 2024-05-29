@@ -75,7 +75,8 @@ public class JwtTokenUserInterceptor implements HandlerInterceptor {
      * @param ex 异常
      */
     @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response,
+                                Object handler, Exception ex) {
         log.info("当前线程结束:{}",BaseContext.getCurrentId());
         BaseContext.removeCurrentId();
     }

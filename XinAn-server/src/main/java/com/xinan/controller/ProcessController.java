@@ -89,6 +89,15 @@ public class ProcessController {
         return Result.success();
     }
 
+    @GetMapping("/allMerchants")
+    @ApiOperation(value = "获取全国商家")
+    public Result<Object> getAllMerchants()
+    {
+        log.info("获取全国商家");
+        processService.addAllMerchant();
+        return Result.success();
+    }
+
     @PutMapping("/merchants")
     @ApiOperation(value = "修改商家")
     public Result<Object> updateMerchants(@RequestBody Merchant merchant)

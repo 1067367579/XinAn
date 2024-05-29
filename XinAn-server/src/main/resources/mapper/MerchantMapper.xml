@@ -2,6 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xinan.mapper.MerchantMapper">
+    <insert id="insertBatch" parameterType="java.util.List">
+        insert into XinAn.merchant (name, merchant_category_id, leader, phone, city, district, detail, lat, lng) VALUES
+        <foreach collection="merchants" item="m" separator=", ">
+            (#{m.name},#{m.merchantCategoryId},#{m.leader},#{m.phone},#{m.city},#{m.district},#{m.detail},#{m.lat},#{m.lng})
+        </foreach>
+    </insert>
     <update id="updateMerchant" parameterType="com.xinan.entity.Merchant">
         update merchant
         <set>
