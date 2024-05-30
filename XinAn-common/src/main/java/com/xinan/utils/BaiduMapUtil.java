@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
 @Data
@@ -137,10 +138,16 @@ public class BaiduMapUtil {
     //获取全国各地的商家 载入数据库
     public List<Merchant> getMerchants()
     {
+        int limit = 0;
         List<Merchant> merchants = new ArrayList<>();
 
         String merchantSearch="https://api.map.baidu.com/place/v2/search?";
         for (String city : CITIES) {
+            if(limit >= 100)
+            {
+                break;
+            }
+
             //构造请求
            Map params = new HashMap();
            params.put("query","殡葬服务");
@@ -161,12 +168,13 @@ public class BaiduMapUtil {
             }
 
             // 提取所需信息
-            for (int i = 0; i < results.size(); i++) {
+            for(int i = 0; i < results.size();i++) {
                 JSONObject result = results.getJSONObject(i);
                 String area = result.getString("area");
                 String name = result.getString("name");
                 String province = result.getString("province");
                 String address = result.getString("address");
+                log.info("地址: {}",address);
                 JSONObject location = result.getJSONObject("location");
                 double lat = 0;
                 double lng = 0;
@@ -178,7 +186,12 @@ public class BaiduMapUtil {
                 else
                 {
                     //如果没有经纬度信息 就自己获取经纬度信息
-                    Point point = getPointByAddress(address);
+                    Point point;
+                    try {
+                        point = getPointByAddress(address);
+                    } catch (Exception e){
+                        continue;
+                    }
                     lat = point.getLat();
                     lng = point.getLng();
                 }
@@ -209,8 +222,9 @@ public class BaiduMapUtil {
                         .phone(telephone)
                         .build();
                 merchants.add(merchant);
-                log.info("获取商家: {}",merchant.toString());
+                log.info("获取商家:{}",merchant.toString());
             }
+            limit++;
         }
         return merchants;
     }
