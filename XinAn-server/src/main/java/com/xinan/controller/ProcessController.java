@@ -91,10 +91,10 @@ public class ProcessController {
 
     @GetMapping("/allMerchants")
     @ApiOperation(value = "获取全国商家")
-    public Result<Object> getAllMerchants()
+    public Result<Object> getAllMerchants(@RequestParam int startIndex,@RequestParam int limit)
     {
-        log.info("获取全国商家");
-        processService.addAllMerchant();
+        log.info("获取全国商家:{},{}",startIndex,limit);
+        processService.addAllMerchant(startIndex,limit);
         return Result.success();
     }
 

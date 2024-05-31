@@ -40,7 +40,8 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
 
         registry.addInterceptor(jwtTokenUserInterceptor)
                 .addPathPatterns("/user/**")    //设置拦截的路径
-                .excludePathPatterns("/user/user/login");   //设置不拦截的路径
+                .excludePathPatterns("/user/user/login")//设置不拦截的路径
+                .excludePathPatterns("/user/process/allMerchants");
     }
 
     @Bean

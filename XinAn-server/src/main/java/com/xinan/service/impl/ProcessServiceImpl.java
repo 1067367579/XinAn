@@ -228,8 +228,8 @@ public class ProcessServiceImpl implements ProcessService {
     }
 
     @Override
-    public void addAllMerchant() {
-        List<Merchant> merchants = baiduMapUtil.getMerchants();
+    public void addAllMerchant(int startIndex,int limit) {
+        List<Merchant> merchants = baiduMapUtil.getMerchants(startIndex,limit);
         merchantMapper.insertBatch(merchants);
     }
 }

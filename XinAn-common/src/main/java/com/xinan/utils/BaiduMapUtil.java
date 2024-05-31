@@ -135,18 +135,13 @@ public class BaiduMapUtil {
     };
 
     //获取全国各地的商家 载入数据库
-    public List<Merchant> getMerchants()
+    public List<Merchant> getMerchants(int startIndex, int limit)
     {
-        int limit = 0;
         List<Merchant> merchants = new ArrayList<>();
 
         String merchantSearch="https://api.map.baidu.com/place/v2/search?";
-        for (String city : CITIES) {
-            if(limit >= 100)
-            {
-                break;
-            }
-
+        for (int k=startIndex;k<limit+startIndex;k++) {
+            String city = CITIES[k];
             //构造请求
            Map params = new HashMap();
            params.put("query","殡葬服务");
@@ -215,6 +210,8 @@ public class BaiduMapUtil {
                         .name(name)
                         .city(city)
                         .district(area)
+                        .leader("未知")
+                        .merchantCategoryId(1L)
                         .detail(address)
                         .lat(lat)
                         .lng(lng)
@@ -223,7 +220,6 @@ public class BaiduMapUtil {
                 merchants.add(merchant);
                 log.info("获取商家:{}",merchant.toString());
             }
-            limit++;
         }
         return merchants;
     }
