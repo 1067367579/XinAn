@@ -227,6 +227,7 @@ public class ProcessServiceImpl implements ProcessService {
         merchantMapper.deleteMerchant(merchantId);
     }
 
+    //TODO 获取到了startIndex = 180 limit = 10 还有 startIndex = 30 limit = 10 没获取
     @Override
     public void addAllMerchant(int startIndex,int limit) {
         List<Merchant> merchants = baiduMapUtil.getMerchants(startIndex,limit);

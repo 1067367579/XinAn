@@ -155,11 +155,12 @@ public class BaiduMapUtil {
 
             //解析返回信息
             JSONObject jsonObject = JSON.parseObject(json);
-            JSONArray results = jsonObject.getJSONArray("results");
-            if(results == null)
+            String status = jsonObject.getString("status");
+            if("4".equals(status))
             {
                 throw new BaseException("今日配额已用完!");
             }
+            JSONArray results = jsonObject.getJSONArray("results");
 
             // 提取所需信息
             for(int i = 0; i < results.size();i++) {
