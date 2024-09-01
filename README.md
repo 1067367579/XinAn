@@ -46,3 +46,12 @@
 
 前端仓库: https://github.com/ho1id4yy/xinan-front-end.git
 
+## 数据库设计文档
+
+数据库设计文档: https://a0xzltkufv4.feishu.cn/docx/KYnkdXXwCod120xQbJpcWz1unmh
+
+## 接口文档
+
+接口文档: https://apifox.com/apidoc/shared-c3db401f-cc4d-4030-9c59-9a741d38da0e
+
+
