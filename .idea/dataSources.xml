@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="XinAn@localhost" uuid="9e866a82-907c-4c9b-b421-b645a6d196df">
+    <data-source source="LOCAL" name="xinan@localhost" uuid="f0d4f755-2455-4afe-940e-d7231fc38e2e">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/XinAn</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306/xinan</jdbc-url>
       <jdbc-additional-properties>
         <property name="com.intellij.clouds.kubernetes.db.host.port" />
         <property name="com.intellij.clouds.kubernetes.db.enabled" value="false" />

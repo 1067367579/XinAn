@@ -36,12 +36,11 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.7.5</version>
                 <configuration>
-                    <!-- 这里可以配置一些参数，但一般情况下不需要指定 mainClass -->
+                    <mainClass>com.xinan.XinAnApplication</mainClass>
                 </configuration>
             </plugin>
-            <!-- 其他插件配置 -->
         </plugins>
     </build>
-
 </project>
